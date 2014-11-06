@@ -1,0 +1,28 @@
+<ion-view title="HTML">
+  <ion-content class="padding">
+    <h1>HTML</h1>
+    <textarea id="input_area" rows="8" cols="40" style="border:1px solid #ccc;"></textarea>
+
+    <br>
+
+    <input type="text" name="button_name" ng-model="button_name" placeholder="Button Name" style="border:1px solid #ccc;">
+
+    <br>
+
+    <input type="text" name="button_code" ng-model="button_code" placeholder="Button Code" style="border:1px solid #ccc;">
+
+    <br>
+
+    <button name="button" ng-click="createButton(button_name, button_code)">Create</button>
+
+    <br><br>
+
+    <ul ng-repeat="button in buttons">
+        <li>
+            <button name="button" ng-click="insertCode(button.code)">{{ button.name }}</button>
+            <br><br>
+        </li>
+    </ul>
+
+  </ion-content>
+</ion-view>
