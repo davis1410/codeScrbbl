@@ -35,7 +35,7 @@ Beneath the textarea is a form where you can create the buttons. Enter a user fr
 
 ## Coming Next
 
-When the app is complete, you will be able to edit HTML, CSS, and JavaScript in their own windows, then preview the results on a seperate preview screen. The buttons you create will accessed via a side menu. You'll also be able to save your code into what is called a *scrbbl* (just like in CodePen you create pens, in JSFiddle you create fiddles, etc...). You can manage and load saved scrbbls via another side menu.
+When the app is complete, you will be able to edit HTML, CSS, and JavaScript in their own windows, then preview the results in a seperate preview window. The code buttons you create will be accessed via a side menu. You'll also be able to save your code into what is called a *scrbbl* (just like in CodePen you create pens, in JSFiddle you create fiddles, etc...). You can manage and load saved scrbbls via another side menu.
 
 ## Known Bugs
 1. Code Mirror doesn't seem to work in Android's WebView
