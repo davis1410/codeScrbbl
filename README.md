@@ -28,3 +28,15 @@ ionic run android (to open in an emulator or push to a connected device)
 ```
 
 ## Using the App
+
+Currently the app is still under development, so there are only a few actions that can be performed in the app. You can enter code via a textarea on the HTML page, and also create buttons that will place inside the textarea whatever code you set them to enter.
+
+Beneath the textarea is a form where you can create the buttons. Enter a user friendly name, and then the code you'd like that button to input. Tap the create button, and your new button will now appear under the textarea. To have the button input it's code, tap on the textarea, close your keyboard, then tap your button. This will enter the code you set the button to input into the textarea.
+
+## Coming Next
+
+When the app is complete, you will be able to edit HTML, CSS, and JavaScript in their own windows, then preview the results on a seperate preview screen. The buttons you create will accessed via a side menu. You'll also be able to save your code into what is called a *scrbbl* (just like in CodePen you create pens, in JSFiddle you create fiddles, etc...). You can manage and load saved scrbbls via another side menu.
+
+## Known Bugs
+1. Code Mirror doesn't seem to work in Android's WebView
+2. When creating a new code button, the screen flashes black briefly
