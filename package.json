@@ -1,7 +1,7 @@
 {
-  "name": "codetester_2",
+  "name": "code_scrbbl",
   "version": "1.0.0",
-  "description": "CodeTester_2: An Ionic project",
+  "description": "Code Scrbbl: Code testing on the go for Front End Web Developers",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",

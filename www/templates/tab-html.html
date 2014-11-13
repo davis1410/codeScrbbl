@@ -1,34 +1,81 @@
-<ion-view title="HTML">
-  <ion-content class="padding">
-    <h1>HTML</h1>
-    <textarea class="item item-input" id="input_area" rows="8" cols="40" placeholder="Enter HTML code here"></textarea>
+<ion-view>
+    <ion-header-bar class="bar-positive">
+        <button class="button button-icon" ng-click="openHTMLCodeButtons()">
+            <i class="icon ion-navicon calm"></i>
+        </button>
+        <h1 class="title">HTML</h1>
+    </ion-header-bar>
 
-    <h3>Code Buttons</h3>
+    <ion-content class="padding">
+        <textarea class="item item-input" id="input_area" rows="20" cols="40" placeholder="Enter HTML code here"></textarea>
 
-    <div class="list" ng-repeat="button in buttons">
-        <div class="item item-button-right">
-            {{ button.name }}
-            <button class="button button-positive" ng-click="insertCode(button.code)">
-                <i class="icon ion-code"></i>
-            </button>
-        </div>
-    </div>
+        <script id="input_code.html" type="text/ng-template">
+            <div class="modal">
 
-    <h3>Add a new code button</h3>
+                <ion-header-bar class="bar-positive">
+                    <h1 class="title">HTML Code Buttons</h1>
+                    <button class="button button-icon" ng-click="closeHTMLCodeButtons()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
 
-    <label class="item item-input">
-        <span class="input-label">Button Name</span>
-        <input type="text" name="button_name" ng-model="button_name">
-    </label>
+                <ion-content>
 
-    <label class="item item-input">
-        <span class="input-label">Button Code</span>
-        <input type="text" name="button_code" ng-model="button_code">
-    </label>
+                    <div class="card" ng-repeat="button in buttons">
+                        <div class="item item-divider positive">
+                            {{ button.name }}
+                        </div>
+                        <div class="item item-button-right">
+                            {{ button.code }}
+                            <button class="button button-positive" ng-click="insertCode(button.code)">
+                                <i class="icon ion-code"></i>
+                            </button>
+                        </div>
+                    </div>
 
-    <button class="button button-block button-energized" ng-click="createButton(button_name, button_code)">
-        Create
-    </button>
+                </ion-content>
 
-  </ion-content>
+            </div>
+        </script>
+
+        <button class="button button-block button-energized" ng-click="newHTMLButton()">
+            New HTML Button
+        </button>
+
+        <script id="new_html_button.html" type="text/ng-template">
+
+            <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-positive">
+                    <h1 class="title">New HTML Button</h1>
+                    <button class="button button-icon" ng-click="closeNewHTMLButton()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                    <form ng-submit="createHTMLButton(button_name, button_code)">
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="text" placeholder="Name" ng-model="button_name">
+                            </label>
+                            <label class="item item-input">
+                                <input type="text" placeholder="Code" ng-model="button_code">
+                            </label>
+                        </div>
+                        <div class="padding">
+                            <button type="submit" class="button button-block button-energized">Create HTML Button</button>
+                        </div>
+                    </form>
+
+                </ion-content>
+
+            </div>
+
+        </script>
+
+    </ion-content>
 </ion-view>
