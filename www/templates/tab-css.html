@@ -1,9 +1,82 @@
 <ion-view>
     <ion-header-bar class="bar-assertive">
+        <button class="button button-icon" ng-click="openCSSCodeButtons()">
+            <i class="icon ion-navicon calm"></i>
+        </button>
         <h1 class="title">CSS</h1>
     </ion-header-bar>
 
     <ion-content class="padding">
-        <h1>CSS</h1>
-    </ion-content>
+        <textarea class="item item-input input_area" id="input_area_css" rows="20" cols="40" placeholder="Enter CSS code here"></textarea>
+
+        <script id="input_code.html" type="text/ng-template">
+        <div class="modal">
+
+        <ion-header-bar class="bar-assertive">
+        <button class="button button-icon" ng-click="closeCSSCodeButtons()">
+            <i class="icon ion-close-circled calm"></i>
+        </button>
+
+        <h1 class="title">CSS Code Buttons</h1>
+
+        <button class="button button-icon" ng-click="newCSSButton()">
+            <i class="icon ion-plus-circled balanced"></i>
+        </button>
+        </ion-header-bar>
+
+        <ion-content>
+
+        <div class="card" ng-repeat="button in buttons">
+            <div class="item item-divider assertive">
+                {{ button.name }}
+            </div>
+            <div class="item item-button-right">
+                {{ button.code }}
+                <button class="button button-assertive" ng-click="insertCode(button.code)">
+                    <i class="icon ion-pound"></i>
+                </button>
+            </div>
+        </div>
+
+        </ion-content>
+
+        </div>
+        </script>
+
+        <script id="new_css_button.html" type="text/ng-template">
+
+        <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-assertive">
+            <h1 class="title">New CSS Button</h1>
+            <button class="button button-icon" ng-click="closeNewCSSButton()">
+                <i class="icon ion-close-circled calm"></i>
+            </button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="createCSSButton(button_name, button_code)">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="button_name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Code" ng-model="button_code">
+                    </label>
+                </div>
+                <div class="padding">
+                    <button type="submit" class="button button-block button-energized">Create CSS Button</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>
+
+</ion-content>
 </ion-view>

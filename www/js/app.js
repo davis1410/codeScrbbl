@@ -1,11 +1,11 @@
 // Front End Web Development Tester App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'code_tester' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'code_scrbbl' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'code_tester.services' is found in services.js
-// 'code_tester.controllers' is found in controllers.js
-angular.module('code_tester', ['ionic', 'code_tester.controllers', 'ui.codemirror'])
+// 'code_scrbbl.services' is found in services.js
+// 'code_scrbbl.controllers' is found in controllers.js
+angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'ui.codemirror'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

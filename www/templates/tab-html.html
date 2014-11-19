@@ -7,15 +7,20 @@
     </ion-header-bar>
 
     <ion-content class="padding">
-        <textarea class="item item-input" id="input_area" rows="20" cols="40" placeholder="Enter HTML code here"></textarea>
+        <textarea class="item item-input input_area" id="input_area_html" rows="20" cols="40" placeholder="Enter HTML code here"></textarea>
 
         <script id="input_code.html" type="text/ng-template">
             <div class="modal">
 
                 <ion-header-bar class="bar-positive">
-                    <h1 class="title">HTML Code Buttons</h1>
                     <button class="button button-icon" ng-click="closeHTMLCodeButtons()">
                         <i class="icon ion-close-circled calm"></i>
+                    </button>
+
+                    <h1 class="title">HTML Code Buttons</h1>
+
+                    <button class="button button-icon" ng-click="newHTMLButton()">
+                        <i class="icon ion-plus-circled balanced"></i>
                     </button>
                 </ion-header-bar>
 
@@ -37,10 +42,6 @@
 
             </div>
         </script>
-
-        <button class="button button-block button-energized" ng-click="newHTMLButton()">
-            New HTML Button
-        </button>
 
         <script id="new_html_button.html" type="text/ng-template">
 

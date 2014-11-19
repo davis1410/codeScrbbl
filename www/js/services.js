@@ -1,4 +1,4 @@
-angular.module('code_tester.services', [])
+angular.module('code_scrbbl.services', [])
 
 /**
  * A simple example service that returns some data.

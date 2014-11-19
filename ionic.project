@@ -1,5 +1,5 @@
 {
-  "name": "Code Scrbbl",
+  "name": "CodeScrbbl",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",
