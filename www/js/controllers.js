@@ -1,132 +1,128 @@
 angular.module('code_scrbbl.controllers', [])
 
-.controller('HTMLCtrl', function($scope, $ionicModal) {
-    var buttonHtmlDB = new localStorageDB("buttonHtml", localStorage);
-    if ( buttonHtmlDB.isNew() ) {
-        buttonHtmlDB.createTable("button", ["name", "code"]);
+.controller('HTMLCtrl', function($scope, $ionicModal, buttonService) {
+    buttonService.createDB('buttonHtml');
 
-        buttonHtmlDB.commit();
-    }
-
-    $scope.buttons = buttonHtmlDB.query("button");
+    $scope.buttons = buttonService.getButtons('buttonHtml');
 
     // Create and load the Modal
-    $ionicModal.fromTemplateUrl('new_html_button.html', function(modal) {
-        $scope.HTMLCreateButtonModal = modal;
+    $ionicModal.fromTemplateUrl('new_button.html', function(modal) {
+        $scope.CreateButtonModal = modal;
     }, {
         scope: $scope,
         animation: 'slide-in-up'
     });
 
-    // Called when the form is submitted
-    $scope.createHTMLButton = function(name, code) {
-        buttonHtmlDB.insert("button", {name: name, code: code});
-        buttonHtmlDB.commit();
-        $scope.HTMLCreateButtonModal.hide();
-        $scope.buttons = buttonHtmlDB.query("button");
+    // Create a new code button
+    $scope.createButton = function(db_name, button_name, button_code) {
+        buttonService.createButton(db_name, button_name, button_code);
+        $scope.CreateButtonModal.hide();
+        $scope.buttons = buttonService.getButtons('buttonHtml');
     };
 
-    // Open the new task modal
-    $scope.newHTMLButton = function() {
-        $scope.HTMLCreateButtonModal.show();
+    // Open the new button modal
+    $scope.newButton = function() {
+        $scope.CreateButtonModal.show();
     };
 
-    // Close the new task modal
-    $scope.closeNewHTMLButton = function() {
-        $scope.HTMLCreateButtonModal.hide();
+    // Close the new button modal
+    $scope.closeNewButton = function() {
+        $scope.CreateButtonModal.hide();
     };
 
+    // Button side menu
     $ionicModal.fromTemplateUrl('input_code.html', function(modal) {
-        $scope.HTMLCodeButtonsModal = modal;
+        $scope.CodeButtonsModal = modal;
     }, {
         scope: $scope,
         animation: 'slide-in-left'
     });
 
-    $scope.openHTMLCodeButtons = function() {
-        $scope.HTMLCodeButtonsModal.show();
+    // Open the Button side menu
+    $scope.openCodeButtons = function() {
+        $scope.CodeButtonsModal.show();
     }
 
-    $scope.closeHTMLCodeButtons = function() {
-        $scope.HTMLCodeButtonsModal.hide();
+    // Close the Button side menu
+    $scope.closeCodeButtons = function() {
+        $scope.CodeButtonsModal.hide();
     }
 
+    // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
         console.log("hit");
         console.log(codeButton);
-        var currentCode = $("#input_area_html").val(),
-            cursorPosition = $("#input_area_html")[0].selectionStart;
+        var currentCode = $("#input_area").val(),
+            cursorPosition = $("#input_area")[0].selectionStart;
             front = (currentCode).substring(0,cursorPosition);
             back = (currentCode).substring(cursorPosition,currentCode.length);
 
-        $("#input_area_html").val(front + codeButton + back);
+        $("#input_area").val(front + codeButton + back);
 
-        $scope.HTMLCodeButtonsModal.hide();
+        $scope.CodeButtonsModal.hide();
     }
 })
 
-.controller('CSSCtrl', function($scope, $ionicModal) {
-    var buttonCSSDB = new localStorageDB("buttonCSS", localStorage);
-    if ( buttonCSSDB.isNew() ) {
-        buttonCSSDB.createTable("button", ["name", "code"]);
+.controller('CSSCtrl', function($scope, $ionicModal, buttonService) {
+    buttonService.createDB('buttonCSS');
 
-        buttonCSSDB.commit();
-    }
-
-    $scope.buttons = buttonCSSDB.query("button");
+    $scope.buttons = buttonService.getButtons('buttonCSS');
 
     // Create and load the Modal
-    $ionicModal.fromTemplateUrl('new_css_button.html', function(modal) {
-        $scope.CSSCreateButtonModal = modal;
+    $ionicModal.fromTemplateUrl('new_button.html', function(modal) {
+        $scope.CreateButtonModal = modal;
     }, {
         scope: $scope,
         animation: 'slide-in-up'
     });
 
-    // Called when the form is submitted
-    $scope.createCSSButton = function(name, code) {
-        buttonCSSDB.insert("button", {name: name, code: code});
-        buttonCSSDB.commit();
-        $scope.CSSCreateButtonModal.hide();
-        $scope.buttons = buttonCSSDB.query("button");
+    // Create a new code button
+    $scope.createButton = function(db_name, button_name, button_code) {
+        buttonService.createButton(db_name, button_name, button_code);
+        $scope.CreateButtonModal.hide();
+        $scope.buttons = buttonService.getButtons('buttonCSS');
     };
 
-    // Open the new task modal
-    $scope.newCSSButton = function() {
-        $scope.CSSCreateButtonModal.show();
+    // Open the new button modal
+    $scope.newButton = function() {
+        $scope.CreateButtonModal.show();
     };
 
-    // Close the new task modal
-    $scope.closeNewCSSButton = function() {
-        $scope.CSSCreateButtonModal.hide();
+    // Close the new button modal
+    $scope.closeNewButton = function() {
+        $scope.CreateButtonModal.hide();
     };
 
+    // Button side menu
     $ionicModal.fromTemplateUrl('input_code.html', function(modal) {
-        $scope.CSSCodeButtonsModal = modal;
+        $scope.CodeButtonsModal = modal;
     }, {
         scope: $scope,
         animation: 'slide-in-left'
     });
 
-    $scope.openCSSCodeButtons = function() {
-        $scope.CSSCodeButtonsModal.show();
+    // Open the Button side menu
+    $scope.openCodeButtons = function() {
+        $scope.CodeButtonsModal.show();
     }
 
-    $scope.closeCSSCodeButtons = function() {
-        $scope.CSSCodeButtonsModal.hide();
+    // Close the Button side menu
+    $scope.closeCodeButtons = function() {
+        $scope.CodeButtonsModal.hide();
     }
 
+    // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
         console.log("hit");
         console.log(codeButton);
-        var currentCode = $("#input_area_css").val(),
-        cursorPosition = $("#input_area_css")[0].selectionStart;
+        var currentCode = $("#input_area").val(),
+        cursorPosition = $("#input_area")[0].selectionStart;
         front = (currentCode).substring(0,cursorPosition);
         back = (currentCode).substring(cursorPosition,currentCode.length);
 
-        $("#input_area_css").val(front + codeButton + back);
+        $("#input_area").val(front + codeButton + back);
 
-        $scope.CSSCodeButtonsModal.hide();
+        $scope.CodeButtonsModal.hide();
     }
 })
 

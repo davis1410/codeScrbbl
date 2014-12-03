@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'code_scrbbl.services' is found in services.js
 // 'code_scrbbl.controllers' is found in controllers.js
-angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'ui.codemirror'])
+angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'ui.codemirror', 'code_scrbbl.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

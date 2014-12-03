@@ -1,26 +1,24 @@
 angular.module('code_scrbbl.services', [])
 
-/**
- * A simple example service that returns some data.
- */
-.factory('Friends', function() {
-  // Might use a resource here that returns a JSON array
+.factory('buttonService', function($rootScope) {
+    return {
+        createDB: function(db_name) {
+            var db = new localStorageDB(db_name, localStorage);
+            if ( db.isNew() ) {
+                db.createTable("button", ["name", "code"]);
 
-  // Some fake testing data
-  var friends = [
-    { id: 0, name: 'Scruff McGruff' },
-    { id: 1, name: 'G.I. Joe' },
-    { id: 2, name: 'Miss Frizzle' },
-    { id: 3, name: 'Ash Ketchum' }
-  ];
-
-  return {
-    all: function() {
-      return friends;
-    },
-    get: function(friendId) {
-      // Simple index lookup
-      return friends[friendId];
+                db.commit();
+            }
+        },
+        getButtons: function(db_name) {
+            var db = localStorageDB(db_name, localStorage);
+            var query = db.query("button");
+            return query;
+        },
+        createButton: function(db_name, name, code) {
+            var db = localStorageDB(db_name, localStorage);
+            db.insert("button", {name: name, code: code});
+            db.commit();
+        },
     }
-  }
 });

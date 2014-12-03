@@ -1,25 +1,25 @@
 <ion-view>
     <ion-header-bar class="bar-assertive">
-        <button class="button button-icon" ng-click="openCSSCodeButtons()">
+        <button class="button button-icon" ng-click="openCodeButtons()">
             <i class="icon ion-navicon calm"></i>
         </button>
         <h1 class="title">CSS</h1>
     </ion-header-bar>
 
     <ion-content class="padding">
-        <textarea class="item item-input input_area" id="input_area_css" rows="20" cols="40" placeholder="Enter CSS code here"></textarea>
+        <textarea class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter CSS code here"></textarea>
 
         <script id="input_code.html" type="text/ng-template">
         <div class="modal">
 
         <ion-header-bar class="bar-assertive">
-        <button class="button button-icon" ng-click="closeCSSCodeButtons()">
+        <button class="button button-icon" ng-click="closeCodeButtons()">
             <i class="icon ion-close-circled calm"></i>
         </button>
 
         <h1 class="title">CSS Code Buttons</h1>
 
-        <button class="button button-icon" ng-click="newCSSButton()">
+        <button class="button button-icon" ng-click="newButton()">
             <i class="icon ion-plus-circled balanced"></i>
         </button>
         </ion-header-bar>
@@ -43,14 +43,14 @@
         </div>
         </script>
 
-        <script id="new_css_button.html" type="text/ng-template">
+        <script id="new_button.html" type="text/ng-template">
 
         <div class="modal">
 
         <!-- Modal header bar -->
         <ion-header-bar class="bar-assertive">
             <h1 class="title">New CSS Button</h1>
-            <button class="button button-icon" ng-click="closeNewCSSButton()">
+            <button class="button button-icon" ng-click="closeNewButton()">
                 <i class="icon ion-close-circled calm"></i>
             </button>
         </ion-header-bar>
@@ -58,7 +58,7 @@
         <!-- Modal content area -->
         <ion-content>
 
-            <form ng-submit="createCSSButton(button_name, button_code)">
+            <form ng-submit="createButton('buttonCSS', button_name, button_code)">
                 <div class="list">
                     <label class="item item-input">
                         <input type="text" placeholder="Name" ng-model="button_name">

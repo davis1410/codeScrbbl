@@ -12,3 +12,4 @@ tmp
 bower_components
 .grunt
 fonts/
+.sass-cache/
