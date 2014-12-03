@@ -1,6 +1,6 @@
 angular.module('code_scrbbl.controllers', [])
 
-.controller('HTMLCtrl', function($scope, $ionicModal, buttonService) {
+.controller('HTMLCtrl', function($scope, $ionicModal, buttonService, scrbblService) {
     buttonService.createDB('buttonHtml');
 
     $scope.buttons = buttonService.getButtons('buttonHtml');
@@ -50,8 +50,6 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        console.log("hit");
-        console.log(codeButton);
         var currentCode = $("#input_area").val(),
             cursorPosition = $("#input_area")[0].selectionStart;
             front = (currentCode).substring(0,cursorPosition);
@@ -60,6 +58,11 @@ angular.module('code_scrbbl.controllers', [])
         $("#input_area").val(front + codeButton + back);
 
         $scope.CodeButtonsModal.hide();
+    }
+
+    // Test
+    $scope.sendToPreview = function(db_name) {
+        scrbblService.sessionDB(db_name);
     }
 })
 
@@ -113,8 +116,6 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        console.log("hit");
-        console.log(codeButton);
         var currentCode = $("#input_area").val(),
         cursorPosition = $("#input_area")[0].selectionStart;
         front = (currentCode).substring(0,cursorPosition);
@@ -126,7 +127,65 @@ angular.module('code_scrbbl.controllers', [])
     }
 })
 
-.controller('JavaScriptCtrl', function($scope) {
+.controller('JavaScriptCtrl', function($scope, $ionicModal, buttonService) {
+    buttonService.createDB('buttonJS');
+
+    $scope.buttons = buttonService.getButtons('buttonJS');
+
+    // Create and load the Modal
+    $ionicModal.fromTemplateUrl('new_button.html', function(modal) {
+        $scope.CreateButtonModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-up'
+    });
+
+    // Create a new code button
+    $scope.createButton = function(db_name, button_name, button_code) {
+        buttonService.createButton(db_name, button_name, button_code);
+        $scope.CreateButtonModal.hide();
+        $scope.buttons = buttonService.getButtons('buttonJS');
+    };
+
+    // Open the new button modal
+    $scope.newButton = function() {
+        $scope.CreateButtonModal.show();
+    };
+
+    // Close the new button modal
+    $scope.closeNewButton = function() {
+        $scope.CreateButtonModal.hide();
+    };
+
+    // Button side menu
+    $ionicModal.fromTemplateUrl('input_code.html', function(modal) {
+        $scope.CodeButtonsModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-left'
+    });
+
+    // Open the Button side menu
+    $scope.openCodeButtons = function() {
+        $scope.CodeButtonsModal.show();
+    }
+
+    // Close the Button side menu
+    $scope.closeCodeButtons = function() {
+        $scope.CodeButtonsModal.hide();
+    }
+
+    // Insert the code from the button into the code editor area
+    $scope.insertCode = function(codeButton) {
+        var currentCode = $("#input_area").val(),
+        cursorPosition = $("#input_area")[0].selectionStart;
+        front = (currentCode).substring(0,cursorPosition);
+        back = (currentCode).substring(cursorPosition,currentCode.length);
+
+        $("#input_area").val(front + codeButton + back);
+
+        $scope.CodeButtonsModal.hide();
+    }
 })
 
 .controller('PreviewCtrl', function($scope) {

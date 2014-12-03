@@ -1,12 +1,11 @@
 angular.module('code_scrbbl.services', [])
 
-.factory('buttonService', function($rootScope) {
+.factory('buttonService', function() {
     return {
         createDB: function(db_name) {
             var db = new localStorageDB(db_name, localStorage);
             if ( db.isNew() ) {
                 db.createTable("button", ["name", "code"]);
-
                 db.commit();
             }
         },
@@ -19,6 +18,18 @@ angular.module('code_scrbbl.services', [])
             var db = localStorageDB(db_name, localStorage);
             db.insert("button", {name: name, code: code});
             db.commit();
+        },
+    }
+})
+
+.factory('scrbblService', function() {
+    return {
+        sessionDB: function(db_name) {
+            var db = new localStorageDB(db_name, sessionStorage);
+            if ( db.isNew() ) {
+                db.createTable("scrbbl", ["html", "css", "js"]);
+                db.commit();
+            }
         },
     }
 });
