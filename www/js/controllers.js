@@ -1,6 +1,6 @@
 angular.module('code_scrbbl.controllers', [])
 
-.controller('HTMLCtrl', function($scope, $ionicModal, buttonService, scrbblService) {
+.controller('HTMLCtrl', function($scope, $ionicModal,  scrbblService, buttonService) {
     buttonService.createDB('buttonHtml');
 
     $scope.buttons = buttonService.getButtons('buttonHtml');
@@ -50,23 +50,17 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        var currentCode = $("#input_area").val(),
-            cursorPosition = $("#input_area")[0].selectionStart;
-            front = (currentCode).substring(0,cursorPosition);
-            back = (currentCode).substring(cursorPosition,currentCode.length);
-
-        $("#input_area").val(front + codeButton + back);
-
+        buttonService.insertCode(codeButton);
         $scope.CodeButtonsModal.hide();
     }
 
-    // Test
-    $scope.sendToPreview = function(db_name) {
-        scrbblService.sessionDB(db_name);
+    // Save the coder input into session storage and send it to preview
+    $scope.sendToPreview = function(type, val) {
+        scrbblService.sessionScrbbl(type, val);
     }
 })
 
-.controller('CSSCtrl', function($scope, $ionicModal, buttonService) {
+.controller('CSSCtrl', function($scope, $ionicModal, scrbblService, buttonService) {
     buttonService.createDB('buttonCSS');
 
     $scope.buttons = buttonService.getButtons('buttonCSS');
@@ -116,18 +110,17 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        var currentCode = $("#input_area").val(),
-        cursorPosition = $("#input_area")[0].selectionStart;
-        front = (currentCode).substring(0,cursorPosition);
-        back = (currentCode).substring(cursorPosition,currentCode.length);
-
-        $("#input_area").val(front + codeButton + back);
-
+        buttonService.insertCode(codeButton);
         $scope.CodeButtonsModal.hide();
+    }
+
+    // Save the coder input into session storage and send it to preview
+    $scope.sendToPreview = function(type, val) {
+        scrbblService.sessionScrbbl(type, val);
     }
 })
 
-.controller('JavaScriptCtrl', function($scope, $ionicModal, buttonService) {
+.controller('JavaScriptCtrl', function($scope, $ionicModal, scrbblService, buttonService) {
     buttonService.createDB('buttonJS');
 
     $scope.buttons = buttonService.getButtons('buttonJS');
@@ -177,14 +170,13 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        var currentCode = $("#input_area").val(),
-        cursorPosition = $("#input_area")[0].selectionStart;
-        front = (currentCode).substring(0,cursorPosition);
-        back = (currentCode).substring(cursorPosition,currentCode.length);
-
-        $("#input_area").val(front + codeButton + back);
-
+        buttonService.insertCode(codeButton);
         $scope.CodeButtonsModal.hide();
+    }
+
+    // Save the coder input into session storage and send it to preview
+    $scope.sendToPreview = function(type, val) {
+        scrbblService.sessionScrbbl(type, val);
     }
 })
 

@@ -7,7 +7,7 @@
     </ion-header-bar>
 
     <ion-content class="padding">
-        <textarea class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter CSS code here"></textarea>
+        <textarea ng-model="input_area" class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter CSS code here" ng-change="sendToPreview('css', input_area)"></textarea>
 
         <script id="input_code.html" type="text/ng-template">
         <div class="modal">
