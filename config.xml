@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.codescrbbl855066" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>Code Scrbbl</name>
+<widget id="com.ionicframework.codescrbbl649402" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>CodeScrbbl</name>
   <description>
-        Code testing on the go for Front End Web Developers
+        An Ionic Framework and Cordova project.
     </description>
-  <author email="contact@brennanscottdavis.com" href="http://www.brennanscottdavis.com/">
-      Brennan Davis - Designer and Developer
+  <author email="hi@ionicframework" href="http://ionicframework.com/">
+      Ionic Framework Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>

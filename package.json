@@ -1,7 +1,7 @@
 {
   "name": "codescrbbl",
   "version": "1.0.0",
-  "description": "Code Scrbbl: Code testing on the go for Front End Web Developers",
+  "description": "CodeScrbbl: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
