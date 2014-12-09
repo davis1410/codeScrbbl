@@ -26,7 +26,8 @@ angular.module('code_scrbbl.controllers', [])
         $window.location.href = "#/tab/html";
     };
 
-    $ionicModal.fromTemplateUrl('load_scrbbl.html', function(modal) {
+    // Load Scrbbl
+    $ionicModal.fromTemplateUrl('manage_scrbbl.html', function(modal) {
         $scope.LoadScrbblModal = modal;
     }, {
         scope: $scope,
@@ -44,11 +45,35 @@ angular.module('code_scrbbl.controllers', [])
         $scope.LoadScrbblModal.hide();
     };
 
-    // edit Scrbbl
-    $scope.editScrbbl = function(name) {
-        scrbblService.editScrbbl(name);
+    // load Scrbbl
+    $scope.loadScrbbl = function(name) {
+        scrbblService.loadScrbbl(name);
         $scope.LoadScrbblModal.hide();
         $window.location.href = "#/tab/html";
+    };
+
+    // Edit Scrbbl
+    $ionicModal.fromTemplateUrl('edit_scrbbl.html', function(modal) {
+        $scope.EditScrbblModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-left'
+    });
+
+    $scope.openEditScrbbl = function(name) {
+        $scope.old_name = name;
+        $scope.edit_scrbbl_name = name;
+        $scope.EditScrbblModal.show();
+    };
+
+    $scope.closeEditScrbbl = function() {
+        $scope.EditScrbblModal.hide();
+    };
+
+    $scope.editScrbbl = function(old_name, name) {
+        scrbblService.editScrbbl(old_name, name);
+        $scope.EditScrbblModal.hide();
+        $scope.scrbbls = scrbblService.loadScrbbls();
     };
 
     // delete Scrbbl
@@ -397,5 +422,6 @@ angular.module('code_scrbbl.controllers', [])
     };
 })
 
-.controller('PreviewCtrl', function($scope) {
+.controller('PreviewCtrl', function($scope, scrbblService) {
+    scrbblService.previewScrbbl();
 });

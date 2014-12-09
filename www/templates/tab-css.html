@@ -70,19 +70,21 @@
                 <!-- Modal content area -->
                 <ion-content>
 
-                    <form ng-submit="createButton('buttonCSS', button_name, button_code)">
-                        <div class="list">
-                            <label class="item item-input">
-                                <input type="text" placeholder="Name" ng-model="button_name">
-                            </label>
-                            <label class="item item-input">
-                                <input type="text" placeholder="Code" ng-model="button_code">
-                            </label>
-                        </div>
-                        <div class="padding">
-                            <button type="submit" class="button button-block button-energized">Create CSS Button</button>
-                        </div>
-                    </form>
+                    <div class="card">
+                        <form ng-submit="createButton('buttonCSS', button_name, button_code)">
+                            <div class="list">
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Name" ng-model="button_name">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Code" ng-model="button_code">
+                                </label>
+                            </div>
+                            <div class="padding">
+                                <button type="submit" class="button button-block button-energized">Create CSS Button</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </ion-content>
 
@@ -105,23 +107,23 @@
                 <!-- Modal content area -->
                 <ion-content>
 
-                    <form ng-submit="editButton('buttonCSS', old_name, edit_button_name, edit_button_code)">
-                        <div class="list">
-                            <label class="item item-input">
+                    <div class="card">
+                        <form ng-submit="editButton('buttonCSS', old_name, edit_button_name, edit_button_code)">
+                            <div class="list">
                                 <input type="hidden" name="old_name" ng-model="old_name">
-                            </label>
-                            <label class="item item-input">
-                                <input type="text" placeholder="Name" ng-model="edit_button_name">
-                            </label>
-                            <label class="item item-input">
-                                <input type="text" placeholder="Code" ng-model="edit_button_code">
-                            </label>
-                        </div>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Name" ng-model="edit_button_name">
+                                </label>
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Code" ng-model="edit_button_code">
+                                </label>
+                            </div>
 
-                        <div class="padding">
-                            <button type="submit" class="button button-block button-energized">Update Button</button>
-                        </div>
-                    </form>
+                            <div class="padding">
+                                <button type="submit" class="button button-block button-energized">Update Button</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </ion-content>
 

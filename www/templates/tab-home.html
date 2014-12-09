@@ -26,6 +26,7 @@
                 <!-- Modal content area -->
                 <ion-content>
 
+                <div class="card">
                     <form ng-submit="newScrbbl(name)">
                         <div class="list">
                             <label class="item item-input">
@@ -36,14 +37,15 @@
                             <button type="submit" class="button button-block button-energized">Create Scrbbl</button>
                         </div>
                     </form>
+                </div>
 
                 </ion-content>
 
             </div>
         </script>
 
-        <!-- New Scrbbl Modal -->
-        <script id="load_scrbbl.html" type="text/ng-template">
+        <!-- Manage Scrbbl Modal -->
+        <script id="manage_scrbbl.html" type="text/ng-template">
             <div class="modal">
 
                 <!-- Modal header bar -->
@@ -63,7 +65,10 @@
                         </div>
 
                         <div class="button-bar">
-                            <button class="button button-energized" ng-click="editScrbbl(scrbbl.name)">
+                            <button class="button button-positive" ng-click="loadScrbbl(scrbbl.name)">
+                                <i class="icon ion-android-download"></i>
+                            </button>
+                            <button class="button button-energized" ng-click="openEditScrbbl(scrbbl.name)">
                                 <i class="icon ion-edit"></i>
                             </button>
                             <button class="button button-assertive" ng-click="deleteScrbbl(scrbbl.name)">
@@ -72,6 +77,41 @@
                         </div>
                     </div>
                     <!-- card -->
+
+                </ion-content>
+
+            </div>
+        </script>
+
+        <!-- Edit Scrbbl Modal -->
+        <script id="edit_scrbbl.html" type="text/ng-template">
+            <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-positive">
+                    <h1 class="title">Edit Scrbbl</h1>
+
+                    <button class="button button-icon" ng-click="closeEditScrbbl()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                    <div class="card">
+                        <form ng-submit="editScrbbl(old_name, edit_scrbbl_name)">
+                            <div class="list">
+                                <input type="hidden" name="old_name" ng-model="old_name">
+                                <label class="item item-input">
+                                    <input type="text" placeholder="Name" ng-model="edit_scrbbl_name">
+                                </label>
+                            </div>
+                            <div class="padding">
+                                <button type="submit" class="button button-block button-energized">Update Scrbbl</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </ion-content>
 

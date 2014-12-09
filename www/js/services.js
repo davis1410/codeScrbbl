@@ -90,7 +90,7 @@ angular.module('code_scrbbl.services', [])
 
             return scrbbls;
         },
-        editScrbbl: function(name) {
+        loadScrbbl: function(name) {
             var db = localStorageDB('savedScrbbls', localStorage);
             var sessionDB = localStorageDB('sessionScrbbl', sessionStorage);
             if ( sessionDB.isNew() ) {
@@ -112,6 +112,15 @@ angular.module('code_scrbbl.services', [])
             });
             sessionDB.commit();
         },
+        editScrbbl: function(old_name, name) {
+            var db = localStorageDB("savedScrbbls", localStorage);
+            db.update("scrbbl", {name: old_name}, function(row) {
+                row.name = name;
+
+                return row;
+            });
+            db.commit();
+        },
         deleteScrbbl: function(name) {
             var db = localStorageDB('savedScrbbls', localStorage);
             db.deleteRows("scrbbl", {name: name});
@@ -120,12 +129,12 @@ angular.module('code_scrbbl.services', [])
         sessionScrbbl: function(type, val) {
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
             if ( db.isNew() ) {
-                db.createTable("scrbbl", ["html", "css", "js"]);
+                db.createTable("scrbbl", ["name", "html", "css", "js"]);
                 db.commit();
             }
             var loaded = db.rowCount("scrbbl");
             if ( loaded == '0' ) {
-                db.insert("scrbbl", {html: "", css: "", js: ""});
+                db.insert("scrbbl", {name: "Untitled", html: "", css: "", js: ""});
                 db.commit();
             }
             db.update("scrbbl", {ID: 1}, function(row) {
@@ -144,31 +153,59 @@ angular.module('code_scrbbl.services', [])
         },
         getSessionScrbbl: function(type) {
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
+            if ( db.isNew() ) {
+                db.createTable("scrbbl", ["name", "html", "css", "js"]);
+                db.commit();
+            }
+
+            var loaded = db.rowCount("scrbbl");
+            if ( loaded == '0' ) {
+                db.insert("scrbbl", {name: "Untitled", html: "", css: "", js: ""});
+                db.commit();
+            }
+
             var scrbbl = db.query("scrbbl");
             var name = scrbbl[0].name;
-            var loaded = db.rowCount("scrbbl");
 
-            if ( loaded == '0' ) {
-                return;
-            }
-            else if ( type == "html" ) {
+            if ( type == "html" && loaded != '0' ) {
                 return {
                     name: name,
                     code: scrbbl[0].html
                 };
             }
-            else if ( type == "css" ) {
+            else if ( type == "css" && loaded != '0' ) {
                 return {
                     name: name,
                     code: scrbbl[0].css
                 };
             }
-            else if ( type == "js" ) {
+            else if ( type == "js" && loaded != '0' ) {
                 return {
                     name: name,
                     code: scrbbl[0].js
                 };
             }
+            else {
+                return {
+                    name: "Untitled",
+                };
+            }
+        },
+        previewScrbbl: function() {
+            var db = new localStorageDB('sessionScrbbl', sessionStorage);
+            var scrbbl = db.query("scrbbl");
+
+            var $frame = $('#output_area');
+            setTimeout( function() {
+                var doc = $frame[0].contentWindow.document;
+                var $html = $('html',doc);
+                var $head = $('head',doc);
+                var $body = $('body',doc);
+
+                $head.html('<style>\n' + scrbbl[0].css + '\n</style>');
+                $body.html(scrbbl[0].html);
+                $html.append('<script>' + scrbbl[0].js + '</script>');
+            }, 1 );
         }
     }
 });

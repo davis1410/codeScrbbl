@@ -19,5 +19,20 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "../www/lib/ionic/scss/ionic.scss";
 
+@mixin box-shadow() {
+    -webkit-box-shadow: 2px 2px 5px #ccc;
+    -moz-box-shadow: 2px 2px 5px #ccc;
+    box-shadow: 2px 2px 5px #ccc;
+}
+
+textarea {
+    @include box-shadow();
+}
+
+#output_area {
+    @include box-shadow();
+    width: 100%;
+    height: 300px;
+}
