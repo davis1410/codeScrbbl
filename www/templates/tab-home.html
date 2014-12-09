@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-content class="padding">
+
+        <h1>Code Scrbbl</h1>
+
+        <button class="button button-block button-balanced" ng-click="openNewScrbbl()">
+            Create New Scrbbl
+        </button>
+
+        <button class="button button-block button-calm">
+            Load Scrbbl
+        </button>
+
+
+        <!-- New Scrbbl Modal -->
+        <script id="new_scrbbl.html" type="text/ng-template">
+            <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-balanced">
+                    <h1 class="title">New Scrbbl</h1>
+                    <button class="button button-icon" ng-click="closeNewScrbbl()">
+                        <i class="icon ion-close-circled dark"></i>
+                    </button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                    <form ng-submit="newScrbbl(name)">
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="text" placeholder="Name" ng-model="name">
+                            </label>
+                        </div>
+                        <div class="padding">
+                            <button type="submit" class="button button-block button-energized">Create Scrbbl</button>
+                        </div>
+                    </form>
+
+                </ion-content>
+
+            </div>
+        </script>
+
+    </ion-content>
+</ion-view>

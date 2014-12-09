@@ -38,6 +38,18 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
 
     // Each tab has its own nav history stack:
 
+    // Home
+    .state('tab.home', {
+        url: '/home',
+        views: {
+            'tab-home': {
+                templateUrl: 'templates/tab-home.html',
+                controller: 'HomeCtrl'
+            }
+        }
+    })
+
+    // HTML
     .state('tab.html', {
       url: '/html',
       views: {
@@ -48,6 +60,7 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
       }
     })
 
+    // CSS
     .state('tab.css', {
       url: '/css',
       views: {
@@ -58,6 +71,7 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
       }
     })
 
+    // JavaScript
     .state('tab.js', {
       url: '/js',
       views: {
@@ -68,6 +82,7 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
       }
     })
 
+    // Preview
     .state('tab.preview', {
       url: '/preview',
       views: {
@@ -79,6 +94,6 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/html');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });

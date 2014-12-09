@@ -1,11 +1,37 @@
 angular.module('code_scrbbl.controllers', [])
 
-.controller('HTMLCtrl', function($scope, $ionicModal,  scrbblService, buttonService) {
+.controller('HomeCtrl', function($scope, $ionicModal, $window, scrbblService) {
+    $ionicModal.fromTemplateUrl('new_scrbbl.html', function(modal) {
+        $scope.NewScrbblModal = modal;
+    }, {
+        scope: $scope,
+        animation: 'slide-in-up'
+    });
+
+    // Open the new Scrbbl modal
+    $scope.openNewScrbbl = function() {
+        $scope.NewScrbblModal.show();
+    };
+
+    // close the new Scrbbl modal
+    $scope.closeNewScrbbl = function() {
+        $scope.NewScrbblModal.hide();
+    }
+
+    // create new Scrbbl
+    $scope.newScrbbl = function(name) {
+        scrbblService.newScrbbl(name);
+        $scope.NewScrbblModal.hide();
+        $window.location.href = "/#/tab/html";
+    };
+})
+
+.controller('HTMLCtrl', function($scope, $ionicModal, scrbblService, buttonService) {
     buttonService.createDB('buttonHtml');
 
     $scope.buttons = buttonService.getButtons('buttonHtml');
 
-    // Create and load the Modal
+    // Create and load the Create Button Modal
     $ionicModal.fromTemplateUrl('new_button.html', function(modal) {
         $scope.CreateButtonModal = modal;
     }, {

@@ -32,6 +32,20 @@ angular.module('code_scrbbl.services', [])
 
 .factory('scrbblService', function() {
     return {
+        newScrbbl: function(name) {
+            var db = new localStorageDB('sessionScrbbl', sessionStorage);
+            if ( db.isNew() ) {
+                db.createTable("scrbbl", ["name", "html", "css", "js"]);
+                db.commit();
+            }
+            db.insertOrUpdate("scrbbl", {ID: 1}, {
+                name: name,
+                html: "",
+                css: "",
+                js: ""
+            });
+            db.commit();
+        },
         sessionScrbbl: function(type, val) {
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
             if ( db.isNew() ) {
