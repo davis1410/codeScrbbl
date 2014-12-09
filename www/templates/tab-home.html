@@ -7,10 +7,9 @@
             Create New Scrbbl
         </button>
 
-        <button class="button button-block button-calm">
-            Load Scrbbl
+        <button class="button button-block button-positive" ng-click="openLoadScrbbl()">
+            Manage Scrbbls
         </button>
-
 
         <!-- New Scrbbl Modal -->
         <script id="new_scrbbl.html" type="text/ng-template">
@@ -37,6 +36,42 @@
                             <button type="submit" class="button button-block button-energized">Create Scrbbl</button>
                         </div>
                     </form>
+
+                </ion-content>
+
+            </div>
+        </script>
+
+        <!-- New Scrbbl Modal -->
+        <script id="load_scrbbl.html" type="text/ng-template">
+            <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-positive">
+                    <h1 class="title">Manage Scrbbls</h1>
+                    <button class="button button-icon" ng-click="closeLoadScrbbl()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                    <div class="card" ng-repeat="scrbbl in scrbbls">
+                        <div class="item item-divider positive">
+                            {{ scrbbl.name }}
+                        </div>
+
+                        <div class="button-bar">
+                            <button class="button button-energized" ng-click="editScrbbl(scrbbl.name)">
+                                <i class="icon ion-edit"></i>
+                            </button>
+                            <button class="button button-assertive" ng-click="deleteScrbbl(scrbbl.name)">
+                                <i class="icon ion-trash-b"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- card -->
 
                 </ion-content>
 

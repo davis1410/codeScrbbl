@@ -77,7 +77,7 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
       views: {
         'tab-js': {
           templateUrl: 'templates/tab-js.html',
-          controller: 'JavaScriptCtrl'
+          controller: 'JSCtrl'
         }
       }
     })

@@ -3,11 +3,14 @@
         <button class="button button-icon" ng-click="openCodeButtons()">
             <i class="icon ion-navicon positive"></i>
         </button>
-        <h1 class="title">JavaScript</h1>
+            <h1 class="title">JS - {{ scrbblName }}</h1>
+        <button class="button button-icon" ng-click="saveScrbbl()">
+            <i class="icon ion-android-archive positive"></i>
+        </button>
     </ion-header-bar>
 
     <ion-content class="padding">
-        <textarea ng-model="input_area" class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter JavaScript code here" ng-change="sendToPreview('js', input_area)"></textarea>
+        <textarea ng-model="input_area" class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter JS code here" ng-change="sendToPreview('js', input_area)"></textarea>
 
         <script id="input_code.html" type="text/ng-template">
             <div class="modal">
@@ -17,7 +20,7 @@
                         <i class="icon ion-close-circled positive"></i>
                     </button>
 
-                    <h1 class="title">JavaScript Code Buttons</h1>
+                    <h1 class="title">JS Code Buttons</h1>
 
                     <button class="button button-icon" ng-click="newButton()">
                         <i class="icon ion-plus-circled energized"></i>
@@ -25,32 +28,40 @@
                 </ion-header-bar>
 
                 <ion-content>
+                    <div class="card" ng-repeat="button in buttons">
+                        <div class="item item-divider assertive">
+                            {{ button.name }}
+                        </div>
 
-                <div class="card" ng-repeat="button in buttons">
-                    <div class="item item-divider calm">
-                        {{ button.name }}
-                    </div>
+                        <div class="item">
+                            {{ button.code }}
+                        </div>
 
-                    <div class="item item-button-right">
-                        {{ button.code }}
-                        <button class="button button-calm" ng-click="insertCode(button.code)">
-                            <i class="icon ion-pound"></i>
-                        </button>
+                        <div class="button-bar">
+                            <button class="button button-positive" ng-click="insertCode(button.code)">
+                                <i class="icon ion-android-developer"></i>
+                            </button>
+                            <button class="button button-energized" ng-click="openEditButton(button.name, button.code)">
+                                <i class="icon ion-edit"></i>
+                            </button>
+                            <button class="button button-assertive" ng-click="deleteButton('buttonJS', button.name)">
+                                <i class="icon ion-trash-b"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
                 </ion-content>
 
             </div>
         </script>
 
-        <script id="new_button.html" type="text/ng-template">
+<script id="new_button.html" type="text/ng-template">
 
-        <div class="modal">
+    <div class="modal">
 
         <!-- Modal header bar -->
         <ion-header-bar class="bar-calm">
-            <h1 class="title">New JavaScript Button</h1>
+            <h1 class="title">New JS Button</h1>
             <button class="button button-icon" ng-click="closeNewButton()">
                 <i class="icon ion-close-circled positive"></i>
             </button>
@@ -69,7 +80,46 @@
                     </label>
                 </div>
                 <div class="padding">
-                    <button type="submit" class="button button-block button-energized">Create JavaScript Button</button>
+                    <button type="submit" class="button button-block button-energized">Create JS Button</button>
+                </div>
+            </form>
+
+        </ion-content>
+
+    </div>
+
+</script>
+
+<script id="edit_button.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar class="bar-calm">
+            <h1 class="title">Edit JS Button</h1>
+            <button class="button button-icon" ng-click="closeEditButton()">
+                <i class="icon ion-close-circled positive"></i>
+            </button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <form ng-submit="editButton('buttonJS', old_name, edit_button_name, edit_button_code)">
+                <div class="list">
+                    <label class="item item-input">
+                        <input type="hidden" name="old_name" ng-model="old_name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Name" ng-model="edit_button_name">
+                    </label>
+                    <label class="item item-input">
+                        <input type="text" placeholder="Code" ng-model="edit_button_code">
+                    </label>
+                </div>
+
+                <div class="padding">
+                    <button type="submit" class="button button-block button-energized">Update Button</button>
                 </div>
             </form>
 

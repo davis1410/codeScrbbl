@@ -3,80 +3,131 @@
         <button class="button button-icon" ng-click="openCodeButtons()">
             <i class="icon ion-navicon calm"></i>
         </button>
-        <h1 class="title">CSS</h1>
+        <h1 class="title">CSS - {{ scrbblName }}</h1>
+        <button class="button button-icon" ng-click="saveScrbbl()">
+            <i class="icon ion-android-archive calm"></i>
+        </button>
     </ion-header-bar>
 
     <ion-content class="padding">
         <textarea ng-model="input_area" class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter CSS code here" ng-change="sendToPreview('css', input_area)"></textarea>
 
         <script id="input_code.html" type="text/ng-template">
-        <div class="modal">
+            <div class="modal">
 
-        <ion-header-bar class="bar-assertive">
-        <button class="button button-icon" ng-click="closeCodeButtons()">
-            <i class="icon ion-close-circled calm"></i>
-        </button>
+                <ion-header-bar class="bar-assertive">
+                    <button class="button button-icon" ng-click="closeCodeButtons()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
 
-        <h1 class="title">CSS Code Buttons</h1>
+                    <h1 class="title">CSS Code Buttons</h1>
 
-        <button class="button button-icon" ng-click="newButton()">
-            <i class="icon ion-plus-circled balanced"></i>
-        </button>
-        </ion-header-bar>
+                    <button class="button button-icon" ng-click="newButton()">
+                        <i class="icon ion-plus-circled balanced"></i>
+                    </button>
+                </ion-header-bar>
 
-        <ion-content>
+                <ion-content>
+                    <div class="card" ng-repeat="button in buttons">
+                        <div class="item item-divider assertive">
+                            {{ button.name }}
+                        </div>
 
-        <div class="card" ng-repeat="button in buttons">
-            <div class="item item-divider assertive">
-                {{ button.name }}
+                        <div class="item">
+                            {{ button.code }}
+                        </div>
+
+                        <div class="button-bar">
+                            <button class="button button-positive" ng-click="insertCode(button.code)">
+                                <i class="icon ion-pound"></i>
+                            </button>
+                            <button class="button button-energized" ng-click="openEditButton(button.name, button.code)">
+                                <i class="icon ion-edit"></i>
+                            </button>
+                            <button class="button button-assertive" ng-click="deleteButton('buttonCSS', button.name)">
+                                <i class="icon ion-trash-b"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </ion-content>
+
             </div>
-            <div class="item item-button-right">
-                {{ button.code }}
-                <button class="button button-assertive" ng-click="insertCode(button.code)">
-                    <i class="icon ion-pound"></i>
-                </button>
-            </div>
-        </div>
-
-        </ion-content>
-
-        </div>
         </script>
 
         <script id="new_button.html" type="text/ng-template">
 
-        <div class="modal">
+            <div class="modal">
 
-        <!-- Modal header bar -->
-        <ion-header-bar class="bar-assertive">
-            <h1 class="title">New CSS Button</h1>
-            <button class="button button-icon" ng-click="closeNewButton()">
-                <i class="icon ion-close-circled calm"></i>
-            </button>
-        </ion-header-bar>
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-assertive">
+                    <h1 class="title">New CSS Button</h1>
+                    <button class="button button-icon" ng-click="closeNewButton()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
 
-        <!-- Modal content area -->
-        <ion-content>
+                <!-- Modal content area -->
+                <ion-content>
 
-            <form ng-submit="createButton('buttonCSS', button_name, button_code)">
-                <div class="list">
-                    <label class="item item-input">
-                        <input type="text" placeholder="Name" ng-model="button_name">
-                    </label>
-                    <label class="item item-input">
-                        <input type="text" placeholder="Code" ng-model="button_code">
-                    </label>
-                </div>
-                <div class="padding">
-                    <button type="submit" class="button button-block button-energized">Create CSS Button</button>
-                </div>
-            </form>
+                    <form ng-submit="createButton('buttonCSS', button_name, button_code)">
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="text" placeholder="Name" ng-model="button_name">
+                            </label>
+                            <label class="item item-input">
+                                <input type="text" placeholder="Code" ng-model="button_code">
+                            </label>
+                        </div>
+                        <div class="padding">
+                            <button type="submit" class="button button-block button-energized">Create CSS Button</button>
+                        </div>
+                    </form>
 
-        </ion-content>
+                </ion-content>
 
-    </div>
+            </div>
 
-</script>
+        </script>
 
-</ion-content>
+        <script id="edit_button.html" type="text/ng-template">
+
+            <div class="modal">
+
+                <!-- Modal header bar -->
+                <ion-header-bar class="bar-assertive">
+                    <h1 class="title">Edit CSS Button</h1>
+                    <button class="button button-icon" ng-click="closeEditButton()">
+                        <i class="icon ion-close-circled calm"></i>
+                    </button>
+                </ion-header-bar>
+
+                <!-- Modal content area -->
+                <ion-content>
+
+                    <form ng-submit="editButton('buttonCSS', old_name, edit_button_name, edit_button_code)">
+                        <div class="list">
+                            <label class="item item-input">
+                                <input type="hidden" name="old_name" ng-model="old_name">
+                            </label>
+                            <label class="item item-input">
+                                <input type="text" placeholder="Name" ng-model="edit_button_name">
+                            </label>
+                            <label class="item item-input">
+                                <input type="text" placeholder="Code" ng-model="edit_button_code">
+                            </label>
+                        </div>
+
+                        <div class="padding">
+                            <button type="submit" class="button button-block button-energized">Update Button</button>
+                        </div>
+                    </form>
+
+                </ion-content>
+
+            </div>
+
+        </script>
+
+    </ion-content>
 </ion-view>
