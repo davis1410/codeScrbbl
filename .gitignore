@@ -11,6 +11,5 @@ tmp
 .DS_Store
 bower_components
 .grunt
-fonts/
 .sass-cache/
 *.map
