@@ -201,17 +201,9 @@ angular.module('code_scrbbl.services', [])
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
             var scrbbl = db.query("scrbbl");
 
-            var $frame = $('#output_area');
-            setTimeout( function() {
-                var doc = $frame[0].contentWindow.document;
-                var $html = $('html',doc);
-                var $head = $('head',doc);
-                var $body = $('body',doc);
-
-                $head.html('<style>\n' + scrbbl[0].css + '\n</style>');
-                $body.html(scrbbl[0].html);
-                $html.append('<script>' + scrbbl[0].js + '</script>');
-            }, 1 );
+            var host = document.querySelector('#preview');
+            var root = host.createShadowRoot();
+            root.innerHTML = '<style>\n' + scrbbl[0].css + '\n</style>\n\n' + scrbbl[0].html + '\n\n<script>\n' + scrbbl[0].js + '\n</script>';
         }
     }
 });
