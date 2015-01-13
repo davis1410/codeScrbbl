@@ -85,7 +85,13 @@ angular.module('code_scrbbl.services', [])
             db.commit();
         },
         loadScrbbls: function() {
-            var db = localStorageDB('savedScrbbls', localStorage);
+            var db = new localStorageDB('savedScrbbls', localStorage);
+
+            if ( db.isNew() ) {
+                db.createTable("scrbbl", ["name", "html", "css", "js"]);
+                db.commit();
+            }
+
             var scrbbls = db.query("scrbbl");
 
             return scrbbls;
