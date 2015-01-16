@@ -100,8 +100,8 @@ angular.module('code_scrbbl.services', [])
             var db = localStorageDB('savedScrbbls', localStorage);
             var sessionDB = localStorageDB('sessionScrbbl', sessionStorage);
             if ( sessionDB.isNew() ) {
-                db.createTable("scrbbl", ["name", "html", "css", "js"]);
-                db.commit();
+                sessionDB.createTable("scrbbl", ["name", "html", "css", "js"]);
+                sessionDB.commit();
             }
 
             var scrbbl = db.query('scrbbl', {name: name});
