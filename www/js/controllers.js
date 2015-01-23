@@ -87,7 +87,7 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // HTML Controller
-.controller('HTMLCtrl', function($scope, $window, $ionicModal, scrbblService, buttonService) {
+.controller('HTMLCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("html");
     $scope.scrbblName = load_data.name;
@@ -194,12 +194,15 @@ angular.module('code_scrbbl.controllers', [])
     // Save Scrbbl
     $scope.saveScrbbl = function() {
         scrbblService.saveScrbbl();
-        $window.alert("Scrbbl saved");
+        var savePopup = $ionicPopup.alert({
+            title: 'Save Scrbbl',
+            template: 'Scrbbl has been saved.'
+        });
     };
 })
 
 // CSS Controller
-.controller('CSSCtrl', function($scope, $window, $ionicModal, scrbblService, buttonService) {
+.controller('CSSCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("css");
     $scope.scrbblName = load_data.name;
@@ -306,12 +309,15 @@ angular.module('code_scrbbl.controllers', [])
     // Save Scrbbl
     $scope.saveScrbbl = function() {
         scrbblService.saveScrbbl();
-        $window.alert("Scrbbl saved");
+        var savePopup = $ionicPopup.alert({
+            title: 'Save Scrbbl',
+            template: 'Scrbbl has been saved.'
+        });
     };
 })
 
 // JavaScript Controller
-.controller('JSCtrl', function($scope, $window, $ionicModal, scrbblService, buttonService) {
+.controller('JSCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("js");
     $scope.scrbblName = load_data.name;
@@ -418,7 +424,10 @@ angular.module('code_scrbbl.controllers', [])
     // Save Scrbbl
     $scope.saveScrbbl = function() {
         scrbblService.saveScrbbl();
-        $window.alert("Scrbbl saved");
+        var savePopup = $ionicPopup.alert({
+            title: 'Save Scrbbl',
+            template: 'Scrbbl has been saved.'
+        });
     };
 })
 
