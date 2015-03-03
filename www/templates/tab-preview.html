@@ -4,7 +4,21 @@
     </ion-header-bar>
 
     <ion-content class="padding">
-        <!-- <iframe id="output_area" name="output_area"></iframe> -->
+        <template>
+            <style>
+                {{ css }}
+            </style>
+            
+            <body>
+                {{ html }}
+            </body>
+            
+            <script type="text/javascript">
+                (function () {
+                    {{ js }}
+                }());
+            </script>
+        </template>
         <div id="preview"></div>
     </ion-content>
 </ion-view>

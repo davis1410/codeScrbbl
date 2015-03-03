@@ -200,10 +200,16 @@ angular.module('code_scrbbl.services', [])
         previewScrbbl: function() {
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
             var scrbbl = db.query("scrbbl");
-
-            var host = document.querySelector('#preview');
-            var root = host.createShadowRoot();
-            root.innerHTML = '<style>\n' + scrbbl[0].css + '\n</style>\n\n' + scrbbl[0].html + '\n\n<script>\n' + scrbbl[0].js + '\n</script>';
+            
+            var html = scrbbl[0].html
+            var css = scrbbl[0].css
+            var js = scrbbl[0].js
+            
+            return {
+                "html": html,
+                "css": css,
+                "js": js,
+            }
         }
     }
 });

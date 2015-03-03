@@ -432,5 +432,13 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 .controller('PreviewCtrl', function($scope, scrbblService) {
-    scrbblService.previewScrbbl();
+    var preview = scrbblService.previewScrbbl();
+    $scope.html = preview.html;
+    $scope.css = preview.css;
+    $scope.js = preview.js;
+    
+    var temp = document.querySelector('template');
+    var host = document.querySelector('#preview');
+    var root = host.createShadowRoot();
+    root.appendChild(document.importNode(temp.content, true));
 });
