@@ -439,5 +439,10 @@ angular.module('code_scrbbl.controllers', [])
     
     var host = document.querySelector('#preview');
     var root = host.createShadowRoot();
-    root.innerHTML = '<style>\n\n' + css + '\n\n</style>\n\n<body>\n\n' + html + '\n\n</body>\n\n<script type="text/javascript">\n\n(function () {\n' + js + '\n}());\n\n</script>';
+//    root.innerHTML = '<style>\n\n' + css + '\n\n</style>\n\n<body>\n\n' + html + '\n\n</body>\n\n<script type="text/javascript">\n\n(function () {\n' + js + '\n}());\n\n</script>';
+    root.innerHTML = '<style>\n\t' + css + '\n</style>\n\n<body>\n\n' + html + '\n\n</body>\n\n<script type="text/javascript">\n\t' + js + '\n</script>';
+    
+    document.addEventListener('click', function(e) {
+        console.log(e.target.id + ' clicked!');
+    });
 });
