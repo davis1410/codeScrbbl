@@ -431,18 +431,35 @@ angular.module('code_scrbbl.controllers', [])
     };
 })
 
-.controller('PreviewCtrl', function($scope, scrbblService) {
+.controller('PreviewCtrl', function($scope, $sce, scrbblService) {
     var preview = scrbblService.previewScrbbl();
-    var html = preview.html;
-    var css = preview.css;
-    var js = preview.js;
-    
-    var host = document.querySelector('#preview');
-    var root = host.createShadowRoot();
-//    root.innerHTML = '<style>\n\n' + css + '\n\n</style>\n\n<body>\n\n' + html + '\n\n</body>\n\n<script type="text/javascript">\n\n(function () {\n' + js + '\n}());\n\n</script>';
-    root.innerHTML = '<style>\n\t' + css + '\n</style>\n\n<body>\n\n' + html + '\n\n</body>\n\n<script type="text/javascript">\n\t' + js + '\n</script>';
-    
-    document.addEventListener('click', function(e) {
-        console.log(e.target.id + ' clicked!');
-    });
+    $scope.data = {
+        html: $sce.trustAsHtml(preview.html)
+    }
+})
+
+.run(function($templateCache) {
+    $templateCache.put('shadow.template.html',
+        '<div class="outer">' +
+        '    <div ng-transclude></div>' +
+        '    {{dynamic}}' +
+        '</div>'
+    );
+})
+
+.directive('shadowTest', function(shadowService) {
+    return {
+        restrict: 'E',
+        replace: false,
+        template: shadowService.shadowTemplate({
+            templateUrl: 'shadow.template.html',
+        }),
+        transclude: true,
+        scope: {
+            dynamic: '='
+        },
+        link: shadowService.shadowLink(function($scope, element) {
+            
+        })
+    };
 });
