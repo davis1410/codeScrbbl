@@ -441,11 +441,9 @@ angular.module('code_scrbbl.controllers', [])
 
 .run(function($templateCache) {
     $templateCache.put('shadow.template.html',
-        '<div class="outer">' +
-        '   <div ng-transclude></div>' +
-        '   <style ng-bind-html="css"></style>' +
-        '   <div ng-bind-html="html"></div>' +
-        '</div>'
+        '<div ng-transclude></div>' +
+        '<style ng-bind-html="css"></style>' +
+        '<div ng-bind-html="html"></div>'
     );
 })
 
