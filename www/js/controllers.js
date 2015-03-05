@@ -434,15 +434,17 @@ angular.module('code_scrbbl.controllers', [])
 .controller('PreviewCtrl', function($scope, $sce, scrbblService) {
     var preview = scrbblService.previewScrbbl();
     $scope.data = {
-        html: $sce.trustAsHtml(preview.html)
+        html: $sce.trustAsHtml(preview.html),
+        css: $sce.trustAsHtml(preview.css)
     }
 })
 
 .run(function($templateCache) {
     $templateCache.put('shadow.template.html',
         '<div class="outer">' +
-        '    <div ng-transclude></div>' +
-        '    {{dynamic}}' +
+        '   <div ng-transclude></div>' +
+        '   <style ng-bind-html="css"></style>' +
+        '   <div ng-bind-html="html"></div>' +
         '</div>'
     );
 })
@@ -456,7 +458,8 @@ angular.module('code_scrbbl.controllers', [])
         }),
         transclude: true,
         scope: {
-            dynamic: '='
+            html: '=',
+            css: '='
         },
         link: shadowService.shadowLink(function($scope, element) {
             
