@@ -92,8 +92,8 @@ angular.module('code_scrbbl.controllers', [])
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
     editor.focus();
-    editor.getSession().selection.on('changeCursor', function(e) {
-        editor.focus();
+    editor.on("click", function() {
+        editor.focus();       
     });
     
     // If code exists, load it when returning to this page
