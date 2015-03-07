@@ -88,10 +88,18 @@ angular.module('code_scrbbl.controllers', [])
 
 // HTML Controller
 .controller('HTMLCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+    // Initiate the code editor
+    var editor = ace.edit("editor");
+    editor.getSession().setMode("ace/mode/html");
+    editor.focus();
+    editor.getSession().selection.on('changeCursor', function(e) {
+        editor.focus();
+    });
+    
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("html");
     $scope.scrbblName = load_data.name;
-    $scope.input_area = load_data.code;
+    editor.setValue(load_data.code);
 
     // Create the container for the buttons if it doesn't already exist
     buttonService.createDB('buttonHtml');
@@ -187,7 +195,14 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     // Save the coder input into session storage and send it to preview
-    $scope.sendToPreview = function(type, val) {
+    editor.getSession().on('change', function(e) {
+        var type = "html";
+        var val = editor.getValue();
+        scrbblService.sessionScrbbl(type, val);
+    });
+    
+    $scope.sendToPreview = function(type) {
+        var val = editor.getValue();
         scrbblService.sessionScrbbl(type, val);
     };
 
