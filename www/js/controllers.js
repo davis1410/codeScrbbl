@@ -92,7 +92,10 @@ angular.module('code_scrbbl.controllers', [])
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
     editor.focus();
-    editor.on("click", function() {
+    editor.on("tap", function(e,data) {
+        console.log("Hit");
+        console.log(data.x);
+        console.log(data.y);
         editor.focus();       
     });
     

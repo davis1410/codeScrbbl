@@ -39,4 +39,5 @@ textarea {
 
 .ace-tm {
     height: 250px;
+    @include box-shadow();
 }
