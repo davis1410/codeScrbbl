@@ -91,13 +91,13 @@ angular.module('code_scrbbl.controllers', [])
     // Initiate the code editor
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
-    editor.focus();
-    editor.on("tap", function(e,data) {
-        console.log("Hit");
-        console.log(data.x);
-        console.log(data.y);
-        editor.focus();       
-    });
+//    editor.focus();
+
+    $scope.focusEditor = function() {
+        console.log("tap");
+        editor.focus();
+        cordova.plugins.Keyboard.show();
+    }
     
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("html");
