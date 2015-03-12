@@ -94,15 +94,18 @@ angular.module('code_scrbbl.controllers', [])
 //    editor.focus();
 
     $scope.focusEditor = function() {
-        console.log("tap");
         editor.focus();
+        console.log(editor.renderer.screenToTextCoordinates());
+        var pos = {'row': 0, 'column': 14}
+        console.log(pos);
+        editor.moveCursorToPosition(pos);
         cordova.plugins.Keyboard.show();
     }
     
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("html");
     $scope.scrbblName = load_data.name;
-    editor.setValue(load_data.code);
+    editor.setValue(load_data.code, 1);
 
     // Create the container for the buttons if it doesn't already exist
     buttonService.createDB('buttonHtml');

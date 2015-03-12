@@ -21,7 +21,10 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  
+  // Place tabs at the bottom of the screen
+  $ionicConfigProvider.tabs.position('bottom');
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
