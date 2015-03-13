@@ -221,11 +221,6 @@ angular.module('code_scrbbl.controllers', [])
         var val = editor.getValue();
         scrbblService.sendToPreview(type, val);
     });
-    
-    $scope.sendToPreview = function(type) {
-        var val = editor.getValue();
-        scrbblService.sendToPreview(type, val);
-    };
 
     // Save Scrbbl
     $scope.saveScrbbl = function() {
