@@ -96,15 +96,20 @@ angular.module('code_scrbbl.controllers', [])
     // Initiate the code editor
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
-//    editor.focus();
 
     $scope.focusEditor = function() {
         editor.focus();
-        console.log(editor.getCursorPosition());
-        var pos = {'row': 0, 'column': 6}
-        console.log(pos);
-        editor.moveCursorToPosition(pos);
-//        cordova.plugins.Keyboard.show();
+        
+        $("#editor").on("tap", function(e, data) {
+            var row = Number(data.x);
+            var column = Number(data.y);
+            
+            var pos = editor.renderer.screenToTextCoordinates(row, column);
+            console.log(pos);
+            
+            var move = editor.moveCursorToPosition(pos)
+        });
+        cordova.plugins.Keyboard.show();
     }
     
     // If code exists, load it when returning to this page
