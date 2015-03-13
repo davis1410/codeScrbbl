@@ -84,7 +84,7 @@ angular.module('code_scrbbl.services', [])
             });
             db.commit();
         },
-        loadScrbbls: function() {
+        loadSavedScrbbls: function() {
             var db = new localStorageDB('savedScrbbls', localStorage);
 
             if ( db.isNew() ) {
@@ -129,10 +129,17 @@ angular.module('code_scrbbl.services', [])
         },
         deleteScrbbl: function(name) {
             var db = localStorageDB('savedScrbbls', localStorage);
+            var sessionDB = localStorageDB('sessionScrbbl', sessionStorage);
+            
+            // Delete scrbbl from saved scrbbls and session scrbbl
             db.deleteRows("scrbbl", {name: name});
+            sessionDB.deleteRows("scrbbl", {name: name});
+            
+            // Commit the changes
             db.commit();
+            sessionDB.commit();
         },
-        sessionScrbbl: function(type, val) {
+        sendToPreview: function(type, val) {
             var db = new localStorageDB('sessionScrbbl', sessionStorage);
             if ( db.isNew() ) {
                 db.createTable("scrbbl", ["name", "html", "css", "js"]);

@@ -1,7 +1,7 @@
 angular.module('code_scrbbl.controllers', [])
 
 // Home Controller
-.controller('HomeCtrl', function($scope, $ionicModal, $window, scrbblService) {
+.controller('HomeCtrl', function($scope, $ionicModal, $ionicPopup, $window, scrbblService) {
     $ionicModal.fromTemplateUrl('new_scrbbl.html', function(modal) {
         $scope.NewScrbblModal = modal;
     }, {
@@ -36,7 +36,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // open Load Scrbbl modal
     $scope.openLoadScrbbl = function() {
-        $scope.scrbbls = scrbblService.loadScrbbls();
+        $scope.scrbbls = scrbblService.loadSavedScrbbls();
         $scope.LoadScrbblModal.show();
     };
 
@@ -73,21 +73,26 @@ angular.module('code_scrbbl.controllers', [])
     $scope.editScrbbl = function(old_name, name) {
         scrbblService.editScrbbl(old_name, name);
         $scope.EditScrbblModal.hide();
-        $scope.scrbbls = scrbblService.loadScrbbls();
+        $scope.scrbbls = scrbblService.loadSavedScrbbls();
     };
 
     // delete Scrbbl
     $scope.deleteScrbbl = function(name) {
-        if ($window.confirm('Are you sure you want to delete this button?')) {
-            scrbblService.deleteScrbbl(name);
-            // $scope.CodeButtonsModal.hide();
-            $scope.scrbbls = scrbblService.loadScrbbls();
-        }
+        var deleteScrbblConfirm = $ionicPopup.confirm({
+            title: 'Delete Scrbbl',
+            template: 'Are you sure you want to delete this Scrbbl?'
+        });
+        deleteScrbblConfirm.then(function(res) {
+            if(res) {
+                scrbblService.deleteScrbbl(name);
+                $scope.scrbbls = scrbblService.loadSavedScrbbls();
+            }
+        });
     };
 })
 
 // HTML Controller
-.controller('HTMLCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('HTMLCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // Initiate the code editor
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
@@ -95,11 +100,11 @@ angular.module('code_scrbbl.controllers', [])
 
     $scope.focusEditor = function() {
         editor.focus();
-        console.log(editor.renderer.screenToTextCoordinates());
-        var pos = {'row': 0, 'column': 14}
+        console.log(editor.getCursorPosition());
+        var pos = {'row': 0, 'column': 6}
         console.log(pos);
         editor.moveCursorToPosition(pos);
-        cordova.plugins.Keyboard.show();
+//        cordova.plugins.Keyboard.show();
     }
     
     // If code exists, load it when returning to this page
@@ -131,11 +136,16 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     $scope.deleteButton = function(db_name, name) {
-        if ($window.confirm('Are you sure you want to delete this button?')) {
-            buttonService.deleteButton(db_name, name);
-            // $scope.CodeButtonsModal.hide();
-            $scope.buttons = buttonService.getButtons('buttonHtml');
-        }
+        var deleteButtonConfirm = $ionicPopup.confirm({
+            title: 'Delete Button',
+            template: 'Are you sure you want to delete this button?'
+        });
+        deleteButtonConfirm.then(function(res) {
+            if(res) {
+                buttonService.deleteButton(db_name, name);
+                $scope.buttons = buttonService.getButtons('buttonJS');
+            }
+        });
     };
 
     // Open the new button modal
@@ -204,12 +214,12 @@ angular.module('code_scrbbl.controllers', [])
     editor.getSession().on('change', function(e) {
         var type = "html";
         var val = editor.getValue();
-        scrbblService.sessionScrbbl(type, val);
+        scrbblService.sendToPreview(type, val);
     });
     
     $scope.sendToPreview = function(type) {
         var val = editor.getValue();
-        scrbblService.sessionScrbbl(type, val);
+        scrbblService.sendToPreview(type, val);
     };
 
     // Save Scrbbl
@@ -223,7 +233,7 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // CSS Controller
-.controller('CSSCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('CSSCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("css");
     $scope.scrbblName = load_data.name;
@@ -253,11 +263,16 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     $scope.deleteButton = function(db_name, name) {
-        if ($window.confirm('Are you sure you want to delete this button?')) {
-            buttonService.deleteButton(db_name, name);
-            // $scope.CodeButtonsModal.hide();
-            $scope.buttons = buttonService.getButtons('buttonCSS');
-        }
+        var deleteButtonConfirm = $ionicPopup.confirm({
+            title: 'Delete Button',
+            template: 'Are you sure you want to delete this button?'
+        });
+        deleteButtonConfirm.then(function(res) {
+            if(res) {
+                buttonService.deleteButton(db_name, name);
+                $scope.buttons = buttonService.getButtons('buttonJS');
+            }
+        });
     };
 
     // Open the new button modal
@@ -324,7 +339,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Save the coder input into session storage and send it to preview
     $scope.sendToPreview = function(type, val) {
-        scrbblService.sessionScrbbl(type, val);
+        scrbblService.sendToPreview(type, val);
     };
 
     // Save Scrbbl
@@ -338,7 +353,7 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // JavaScript Controller
-.controller('JSCtrl', function($scope, $window, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('JSCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
     // If code exists, load it when returning to this page
     var load_data = scrbblService.getSessionScrbbl("js");
     $scope.scrbblName = load_data.name;
@@ -368,11 +383,16 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     $scope.deleteButton = function(db_name, name) {
-        if ($window.confirm('Are you sure you want to delete this button?')) {
-            buttonService.deleteButton(db_name, name);
-            // $scope.CodeButtonsModal.hide();
-            $scope.buttons = buttonService.getButtons('buttonJS');
-        }
+        var deleteButtonConfirm = $ionicPopup.confirm({
+            title: 'Delete Button',
+            template: 'Are you sure you want to delete this button?'
+        });
+        deleteButtonConfirm.then(function(res) {
+            if(res) {
+                buttonService.deleteButton(db_name, name);
+                $scope.buttons = buttonService.getButtons('buttonJS');
+            }
+        });
     };
 
     // Open the new button modal
@@ -439,7 +459,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Save the coder input into session storage and send it to preview
     $scope.sendToPreview = function(type, val) {
-        scrbblService.sessionScrbbl(type, val);
+        scrbblService.sendToPreview(type, val);
     };
 
     // Save Scrbbl
