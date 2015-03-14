@@ -7603,7 +7603,10 @@ textarea {
   height: 300px; }
 
 .ace-tm {
-  height: 250px;
+  height: 450px;
   -webkit-box-shadow: 2px 2px 5px #ccc;
   -moz-box-shadow: 2px 2px 5px #ccc;
   box-shadow: 2px 2px 5px #ccc; }
+
+.popup-body {
+  overflow: inherit; }

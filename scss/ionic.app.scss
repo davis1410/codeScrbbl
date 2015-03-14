@@ -38,6 +38,10 @@ textarea {
 }
 
 .ace-tm {
-    height: 250px;
+    height: 450px;
     @include box-shadow();
+}
+
+.popup-body {
+    overflow: inherit;
 }

@@ -1,5 +1,37 @@
 angular.module('code_scrbbl.services', [])
 
+.factory('editorService', function() {
+    return {
+        initializeEditor: function(type) {
+            var editor = ace.edit(type + "_editor");            
+            document.getElementById(type + '_editor').style.fontSize='16px';
+            editor.getSession().setUseWrapMode(true);
+            
+            if (type == "js") {
+                editor.getSession().setMode("ace/mode/javascript");
+            }
+            else {
+                editor.getSession().setMode("ace/mode/" + type);
+            }
+            
+            return editor;
+        },
+        focusEditor: function(editor, type) {
+            editor.focus();
+
+            $("#" + type + "_editor").on("tap", function(e, data) {
+                var row = Number(data.x);
+                var column = Number(data.y);
+
+                var pos = editor.renderer.screenToTextCoordinates(row, column);
+
+                var move = editor.moveCursorToPosition(pos)
+            });
+            cordova.plugins.Keyboard.show();
+        }
+    }
+})
+
 .factory('buttonService', function() {
     return {
         createDB: function(db_name) {
@@ -19,13 +51,9 @@ angular.module('code_scrbbl.services', [])
             db.insert("button", {name: name, code: code});
             db.commit();
         },
-        insertCode: function(codeButton) {
-            var currentCode = $("#input_area").val(),
-            cursorPosition = $("#input_area")[0].selectionStart;
-            front = (currentCode).substring(0,cursorPosition);
-            back = (currentCode).substring(cursorPosition,currentCode.length);
-
-            $("#input_area").val(front + codeButton + back);
+        insertCode: function(editor, codeButton) {
+            editor.insert(codeButton);
+            editor.focus();
         },
         editButton: function(db_name, old_name, name, code) {
             var db = localStorageDB(db_name, localStorage);

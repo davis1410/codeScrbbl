@@ -10,7 +10,7 @@
     </ion-header-bar>
 
     <ion-content class="padding">
-        <textarea ng-model="input_area" class="item item-input input_area" id="input_area" rows="20" cols="40" placeholder="Enter JS code here" ng-change="sendToPreview('js', input_area)"></textarea>
+        <div id="js_editor" ng-click="focusEditor()"></div>
 
         <script id="input_code.html" type="text/ng-template">
             <div class="modal">

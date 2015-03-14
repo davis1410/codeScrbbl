@@ -24,6 +24,7 @@ angular.module('code_scrbbl.controllers', [])
         scrbblService.newScrbbl(name);
         $scope.NewScrbblModal.hide();
         $window.location.href = "#/tab/html";
+//        $window.location.reload();
     };
 
     // Load Scrbbl
@@ -50,6 +51,7 @@ angular.module('code_scrbbl.controllers', [])
         scrbblService.loadScrbbl(name);
         $scope.LoadScrbblModal.hide();
         $window.location.href = "#/tab/html";
+//        $window.location.reload();
     };
 
     // Edit Scrbbl
@@ -92,30 +94,24 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // HTML Controller
-.controller('HTMLCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('HTMLCtrl', function($scope, $ionicModal, $ionicPopup, editorService, scrbblService, buttonService) {
+    // Editor type
+    var type = "html";
+    
     // Initiate the code editor
-    var editor = ace.edit("editor");
-    editor.getSession().setMode("ace/mode/html");
+    var editor = editorService.initializeEditor(type);
 
+    // Focus the editor and position the cursor on tap
     $scope.focusEditor = function() {
-        editor.focus();
-        
-        $("#editor").on("tap", function(e, data) {
-            var row = Number(data.x);
-            var column = Number(data.y);
-            
-            var pos = editor.renderer.screenToTextCoordinates(row, column);
-            console.log(pos);
-            
-            var move = editor.moveCursorToPosition(pos)
-        });
-        cordova.plugins.Keyboard.show();
+        editorService.focusEditor(editor);
     }
     
     // If code exists, load it when returning to this page
-    var load_data = scrbblService.getSessionScrbbl("html");
-    $scope.scrbblName = load_data.name;
-    editor.setValue(load_data.code, 1);
+    $scope.$on('$ionicView.enter', function(){
+        var load_data = scrbblService.getSessionScrbbl(type);
+        $scope.scrbblName = load_data.name;
+        editor.setValue(load_data.code, 1);
+    });
 
     // Create the container for the buttons if it doesn't already exist
     buttonService.createDB('buttonHtml');
@@ -183,7 +179,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        buttonService.insertCode(codeButton);
+        buttonService.insertCode(editor, codeButton);
         $scope.CodeButtonsModal.hide();
     };
 
@@ -217,7 +213,6 @@ angular.module('code_scrbbl.controllers', [])
 
     // Save the coder input into session storage and send it to preview
     editor.getSession().on('change', function(e) {
-        var type = "html";
         var val = editor.getValue();
         scrbblService.sendToPreview(type, val);
     });
@@ -233,11 +228,24 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // CSS Controller
-.controller('CSSCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('CSSCtrl', function($scope, $ionicModal, $ionicPopup, editorService, scrbblService, buttonService) {
+    // Editor type
+    var type = "css";
+    
+    // Initiate the code editor
+    var editor = editorService.initializeEditor(type);
+
+    // Focus the editor and position the cursor on tap
+    $scope.focusEditor = function() {
+        editorService.focusEditor(editor, type);
+    }
+    
     // If code exists, load it when returning to this page
-    var load_data = scrbblService.getSessionScrbbl("css");
-    $scope.scrbblName = load_data.name;
-    $scope.input_area = load_data.code;
+    $scope.$on('$ionicView.enter', function(){
+        var load_data = scrbblService.getSessionScrbbl(type);
+        $scope.scrbblName = load_data.name;
+        editor.setValue(load_data.code, 1);
+    });
 
     // Create the container for the buttons if it doesn't already exist
     buttonService.createDB('buttonCSS');
@@ -305,7 +313,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        buttonService.insertCode(codeButton);
+        buttonService.insertCode(editor, codeButton);
         $scope.CodeButtonsModal.hide();
     };
 
@@ -338,9 +346,10 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     // Save the coder input into session storage and send it to preview
-    $scope.sendToPreview = function(type, val) {
+    editor.getSession().on('change', function(e) {
+        var val = editor.getValue();
         scrbblService.sendToPreview(type, val);
-    };
+    });
 
     // Save Scrbbl
     $scope.saveScrbbl = function() {
@@ -353,11 +362,24 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 // JavaScript Controller
-.controller('JSCtrl', function($scope, $ionicModal, $ionicPopup, scrbblService, buttonService) {
+.controller('JSCtrl', function($scope, $ionicModal, $ionicPopup, editorService, scrbblService, buttonService) {
+    // Editor type
+    var type = "js";
+    
+    // Initiate the code editor
+    var editor = editorService.initializeEditor(type);
+
+    // Focus the editor and position the cursor on tap
+    $scope.focusEditor = function() {
+        editorService.focusEditor(editor, type);
+    }
+    
     // If code exists, load it when returning to this page
-    var load_data = scrbblService.getSessionScrbbl("js");
-    $scope.scrbblName = load_data.name;
-    $scope.input_area = load_data.code;
+    $scope.$on('$ionicView.enter', function(){
+        var load_data = scrbblService.getSessionScrbbl(type);
+        $scope.scrbblName = load_data.name;
+        editor.setValue(load_data.code, 1);
+    });
 
     // Create the container for the buttons if it doesn't already exist
     buttonService.createDB('buttonJS');
@@ -425,7 +447,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Insert the code from the button into the code editor area
     $scope.insertCode = function(codeButton) {
-        buttonService.insertCode(codeButton);
+        buttonService.insertCode(editor, codeButton);
         $scope.CodeButtonsModal.hide();
     };
 
@@ -458,9 +480,10 @@ angular.module('code_scrbbl.controllers', [])
     };
 
     // Save the coder input into session storage and send it to preview
-    $scope.sendToPreview = function(type, val) {
+    editor.getSession().on('change', function(e) {
+        var val = editor.getValue();
         scrbblService.sendToPreview(type, val);
-    };
+    });
 
     // Save Scrbbl
     $scope.saveScrbbl = function() {
@@ -473,11 +496,14 @@ angular.module('code_scrbbl.controllers', [])
 })
 
 .controller('PreviewCtrl', function($scope, $sce, scrbblService) {
-    var preview = scrbblService.previewScrbbl();
-    $scope.data = {
-        html: $sce.trustAsHtml(preview.html),
-        css: $sce.trustAsHtml(preview.css)
-    }
+    // Get and render the code
+    $scope.$on('$ionicView.enter', function(){
+        var preview = scrbblService.previewScrbbl();
+        $scope.data = {
+            html: $sce.trustAsHtml(preview.html),
+            css: $sce.trustAsHtml(preview.css)
+        }
+    });
 })
 
 .run(function($templateCache) {
