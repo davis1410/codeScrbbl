@@ -1,13 +1,7 @@
-<ion-view>
-    <ion-header-bar align-title="center" class="bar-calm">
-        <button class="button button-icon" ng-click="openCodeButtons()">
-            <i class="icon ion-navicon positive"></i>
-        </button>
-            <h1 class="title">JS - {{ scrbblName }}</h1>
-        <button class="button button-icon" ng-click="saveScrbbl()">
-            <i class="icon ion-android-archive positive"></i>
-        </button>
-    </ion-header-bar>
+<ion-view view-title="{{ scrbblName }} - JS">
+    <ion-nav-buttons side="right">
+        <button ng-click="saveScrbbl()">Save</button>
+    </ion-nav-buttons>
 
     <ion-content class="padding">
         <div id="js_editor" ng-click="focusEditor()"></div>

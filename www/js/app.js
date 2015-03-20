@@ -32,6 +32,20 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+    // New Scrbbl
+    .state('new-scrbbl', {
+        url: '/new-scrbbl',
+        templateUrl: 'templates/new-scrbbl.html',
+        controller: 'NewScrbblCtrl'
+    })
+  
+    // New Scrbbl
+    .state('manage-scrbbls', {
+        url: '/manage-scrbbls',
+        templateUrl: 'templates/manage-scrbbls.html',
+        controller: 'ManageScrbblsCtrl'
+    })
+
     // setup an abstract state for the tabs directive
     .state('tab', {
       url: "/tab",
@@ -40,17 +54,6 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
     })
 
     // Each tab has its own nav history stack:
-
-    // Home
-    .state('tab.home', {
-        url: '/home',
-        views: {
-            'tab-home': {
-                templateUrl: 'templates/tab-home.html',
-                controller: 'HomeCtrl'
-            }
-        }
-    })
 
     // HTML
     .state('tab.html', {
@@ -97,6 +100,6 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
     });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/tab/html');
 
 });

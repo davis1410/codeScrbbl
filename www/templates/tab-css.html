@@ -1,13 +1,7 @@
-<ion-view>
-    <ion-header-bar align-title="center" class="bar-assertive">
-        <button class="button button-icon" ng-click="openCodeButtons()">
-            <i class="icon ion-navicon calm"></i>
-        </button>
-        <h1 class="title">CSS - {{ scrbblName }}</h1>
-        <button class="button button-icon" ng-click="saveScrbbl()">
-            <i class="icon ion-android-archive calm"></i>
-        </button>
-    </ion-header-bar>
+<ion-view view-title="{{ scrbblName }} - CSS">
+    <ion-nav-buttons side="right">
+        <button ng-click="saveScrbbl()">Save</button>
+    </ion-nav-buttons>
 
     <ion-content class="padding">
         <div id="css_editor" ng-click="focusEditor()"></div>

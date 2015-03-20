@@ -1,57 +1,22 @@
 angular.module('code_scrbbl.controllers', [])
 
-// Home Controller
-.controller('HomeCtrl', function($scope, $ionicModal, $ionicPopup, $window, scrbblService) {
-    $ionicModal.fromTemplateUrl('new_scrbbl.html', function(modal) {
-        $scope.NewScrbblModal = modal;
-    }, {
-        scope: $scope,
-        animation: 'slide-in-up'
-    });
-
-    // Open the new Scrbbl modal
-    $scope.openNewScrbbl = function() {
-        $scope.NewScrbblModal.show();
-    };
-
-    // close the new Scrbbl modal
-    $scope.closeNewScrbbl = function() {
-        $scope.NewScrbblModal.hide();
-    }
-
+// New Scrbbl Controller
+.controller('NewScrbblCtrl', function($scope, $window, scrbblService) {
     // create new Scrbbl
     $scope.newScrbbl = function(name) {
         scrbblService.newScrbbl(name);
-        $scope.NewScrbblModal.hide();
         $window.location.href = "#/tab/html";
-//        $window.location.reload();
-    };
+    };    
+})
 
-    // Load Scrbbl
-    $ionicModal.fromTemplateUrl('manage_scrbbl.html', function(modal) {
-        $scope.LoadScrbblModal = modal;
-    }, {
-        scope: $scope,
-        animation: 'slide-in-up'
-    });
-
-    // open Load Scrbbl modal
-    $scope.openLoadScrbbl = function() {
-        $scope.scrbbls = scrbblService.loadSavedScrbbls();
-        $scope.LoadScrbblModal.show();
-    };
-
-    // close Load Scrbbl Modal
-    $scope.closeLoadScrbbl = function() {
-        $scope.LoadScrbblModal.hide();
-    };
+// Manage Scrbbls Controller
+.controller('ManageScrbblsCtrl', function($scope, $ionicModal, $ionicPopup, $window, scrbblService) {
+    $scope.scrbbls = scrbblService.loadSavedScrbbls();
 
     // load Scrbbl
     $scope.loadScrbbl = function(name) {
         scrbblService.loadScrbbl(name);
-        $scope.LoadScrbblModal.hide();
         $window.location.href = "#/tab/html";
-//        $window.location.reload();
     };
 
     // Edit Scrbbl
@@ -103,7 +68,7 @@ angular.module('code_scrbbl.controllers', [])
 
     // Focus the editor and position the cursor on tap
     $scope.focusEditor = function() {
-        editorService.focusEditor(editor);
+        editorService.focusEditor(editor, type);
     }
     
     // If code exists, load it when returning to this page
@@ -514,7 +479,7 @@ angular.module('code_scrbbl.controllers', [])
     );
 })
 
-.directive('shadowTest', function(shadowService) {
+.directive('codePreview', function(shadowService) {
     return {
         restrict: 'E',
         replace: false,
