@@ -7,13 +7,13 @@
             </div>
 
             <div class="button-bar">
-                <button class="button button-positive" ng-click="loadScrbbl(scrbbl.name)">
+                <button class="button button-positive" on-tap="loadScrbbl(scrbbl.name)">
                     <i class="icon ion-android-download"></i>
                 </button>
-                <button class="button button-energized" ng-click="openEditScrbbl(scrbbl.name)">
+                <button class="button button-energized" on-tap="openEditScrbbl(scrbbl.name)">
                     <i class="icon ion-edit"></i>
                 </button>
-                <button class="button button-assertive" ng-click="deleteScrbbl(scrbbl.name)">
+                <button class="button button-assertive" on-tap="deleteScrbbl(scrbbl.name)">
                     <i class="icon ion-trash-b"></i>
                 </button>
             </div>
@@ -30,7 +30,7 @@
             <ion-header-bar align-title="center" class="bar-positive">
                 <h1 class="title">Edit Scrbbl</h1>
 
-                <button class="button button-icon" ng-click="closeEditScrbbl()">
+                <button class="button button-icon" on-tap="closeEditScrbbl()">
                     <i class="icon ion-close-circled calm"></i>
                 </button>
             </ion-header-bar>

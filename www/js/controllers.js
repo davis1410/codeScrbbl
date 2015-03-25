@@ -24,7 +24,7 @@ angular.module('code_scrbbl.controllers', [])
         $scope.EditScrbblModal = modal;
     }, {
         scope: $scope,
-        animation: 'slide-in-left'
+        animation: 'slide-in-up'
     });
 
     $scope.openEditScrbbl = function(name) {
