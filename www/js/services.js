@@ -18,6 +18,7 @@ angular.module('code_scrbbl.services', [])
         },
         focusEditor: function(editor, type) {
             editor.focus();
+            editor.clearSelection();
 
             $("#" + type + "_editor").on("tap", function(e, data) {
                 var row = Number(data.x);

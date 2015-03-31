@@ -129,7 +129,7 @@ angular.module('code_scrbbl.controllers', [])
         $scope.CodeButtonsModal = modal;
     }, {
         scope: $scope,
-        animation: 'slide-in-left'
+        animation: 'slide-in-up'
     });
 
     // Open the Button side menu
@@ -263,7 +263,7 @@ angular.module('code_scrbbl.controllers', [])
         $scope.CodeButtonsModal = modal;
     }, {
         scope: $scope,
-        animation: 'slide-in-left'
+        animation: 'slide-in-up'
     });
 
     // Open the Button side menu
@@ -397,7 +397,7 @@ angular.module('code_scrbbl.controllers', [])
         $scope.CodeButtonsModal = modal;
     }, {
         scope: $scope,
-        animation: 'slide-in-left'
+        animation: 'slide-in-up'
     });
 
     // Open the Button side menu
@@ -466,7 +466,8 @@ angular.module('code_scrbbl.controllers', [])
         var preview = scrbblService.previewScrbbl();
         $scope.data = {
             html: $sce.trustAsHtml(preview.html),
-            css: $sce.trustAsHtml(preview.css)
+            css: $sce.trustAsHtml(preview.css),
+            js: $sce.trustAsHtml(preview.js)
         }
     });
 })
@@ -475,7 +476,8 @@ angular.module('code_scrbbl.controllers', [])
     $templateCache.put('shadow.template.html',
         '<div ng-transclude></div>' +
         '<style ng-bind-html="css"></style>' +
-        '<div ng-bind-html="html"></div>'
+        '<ion-content ng-bind-html="html"></ion-content>' +
+        '<script type="text/javascript" ng-bind-html="js"></script>'
     );
 })
 
@@ -489,7 +491,8 @@ angular.module('code_scrbbl.controllers', [])
         transclude: true,
         scope: {
             html: '=',
-            css: '='
+            css: '=',
+            js: '='
         },
         link: shadowService.shadowLink(function($scope, element) {
             

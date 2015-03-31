@@ -1,23 +1,24 @@
 <ion-view view-title="{{ scrbblName }} - HTML">
     <ion-nav-buttons side="right">
-        <button class="button button-positive" ng-click="saveScrbbl()">Save</button>
+        <button class="button button-positive" on-tap="openCodeButtons()">Snips</button>
+        <button class="button button-positive" on-tap="saveScrbbl()">Save</button>
     </ion-nav-buttons>
     
     <ion-content class="padding">
-        <div id="html_editor" ng-click="focusEditor()"></div>
+        <div id="html_editor" on-tap="focusEditor()"></div>
         
         <script id="input_code.html" type="text/ng-template">
             <div class="modal">
 
                 <ion-header-bar align-title="center" class="bar-positive">
-                    <button class="button button-icon" ng-click="closeCodeButtons()">
-                        <i class="icon ion-close-circled calm"></i>
+                    <button class="button button-icon" on-tap="newButton()">
+                        <i class="icon ion-plus-circled balanced"></i>
                     </button>
 
                     <h1 class="title">HTML Code Buttons</h1>
 
-                    <button class="button button-icon" ng-click="newButton()">
-                        <i class="icon ion-plus-circled balanced"></i>
+                    <button class="button button-icon" on-tap="closeCodeButtons()">
+                        <i class="icon ion-close-circled calm"></i>
                     </button>
                 </ion-header-bar>
 
@@ -32,13 +33,13 @@
                         </div>
 
                         <div class="button-bar">
-                            <button class="button button-positive" ng-click="insertCode(button.code)">
+                            <button class="button button-positive" on-tap="insertCode(button.code)">
                                 <i class="icon ion-code"></i>
                             </button>
-                            <button class="button button-energized" ng-click="openEditButton(button.name, button.code)">
+                            <button class="button button-energized" on-tap="openEditButton(button.name, button.code)">
                                 <i class="icon ion-edit"></i>
                             </button>
-                            <button class="button button-assertive" ng-click="deleteButton('buttonHtml', button.name)">
+                            <button class="button button-assertive" on-tap="deleteButton('buttonHtml', button.name)">
                                 <i class="icon ion-trash-b"></i>
                             </button>
                         </div>
@@ -56,7 +57,7 @@
                 <!-- Modal header bar -->
                 <ion-header-bar align-title="center" class="bar-positive">
                     <h1 class="title">New HTML Button</h1>
-                    <button class="button button-icon" ng-click="closeNewButton()">
+                    <button class="button button-icon" on-tap="closeNewButton()">
                         <i class="icon ion-close-circled calm"></i>
                     </button>
                 </ion-header-bar>
@@ -93,7 +94,7 @@
                 <!-- Modal header bar -->
                 <ion-header-bar align-title="center" class="bar-positive">
                     <h1 class="title">Edit HTML Button</h1>
-                    <button class="button button-icon" ng-click="closeEditButton()">
+                    <button class="button button-icon" on-tap="closeEditButton()">
                         <i class="icon ion-close-circled calm"></i>
                     </button>
                 </ion-header-bar>
