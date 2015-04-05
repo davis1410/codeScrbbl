@@ -6,7 +6,7 @@
 ## Description
 
 Code Scrbbl is a mobile app for Android that allows front end web developers to test HTML, CSS, and JavaScript code while on the go. It's similar to online tools such as CodePen, JSFiddle, and Plunker.
-This app is currently in active development.
+This app is currently in active development. and will soon be ready for beta testing.
 
 ## Development and Testing
 
