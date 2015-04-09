@@ -1,45 +1,33 @@
-<span ng-if="type == 'buttonHtml'"><button class="button button-positive" on-tap="openCodeButtons()">Snips</button></span>
-<span ng-if="type == 'buttonCSS'"><button class="button button-assertive" on-tap="openCodeButtons()">Snips</button></span>
+<button id="snips" class="button button-energized" on-tap="openCodeButtons()">Snips</button>
+
 <script id="input_code.html" type="text/ng-template">
     <div class="modal">
 
-        <ion-header-bar ng-if="type == 'buttonHtml'" align-title="center" class="bar-positive">
-            <button class="button button-icon" on-tap="newButton()">
-                <i class="icon ion-plus-circled balanced"></i>
-            </button>
-        
-            <h1 class="title">HTML Code Snips</h1>
-        
+        <ion-header-bar align-title="center" class="bar-energized">
+            <button class="button button-balanced" on-tap="newButton()">New</button>
+
+            <h1 class="title" ng-if="type == 'buttonHtml'">HTML Code Snips</h1>
+            <h1 class="title" ng-if="type == 'buttonCSS'">CSS Code Snips</h1>
+            <h1 class="title" ng-if="type == 'buttonJS'">JS Code Snips</h1>
+
             <button class="button button-icon" on-tap="closeCodeButtons()">
-                <i class="icon ion-close-circled calm"></i>
-            </button>
-        </ion-header-bar>
-        
-        <ion-header-bar ng-if="type == 'buttonCSS'" align-title="center" class="bar-assertive">
-            <button class="button button-icon" on-tap="newButton()">
-                <i class="icon ion-plus-circled balanced"></i>
-            </button>
-        
-            <h1 class="title">CSS Code Snips</h1>
-        
-            <button class="button button-icon" on-tap="closeCodeButtons()">
-                <i class="icon ion-close-circled calm"></i>
+                <i class="icon ion-close-circled assertive"></i>
             </button>
         </ion-header-bar>
 
         <ion-content>
-
             <div class="card" ng-repeat="button in buttons">
-                <div class="item item-divider positive">
+                <div class="item item-divider assertive">
                     {{ button.name }}
                 </div>
+
                 <div class="item">
                     {{ button.code }}
                 </div>
 
                 <div class="button-bar">
                     <button class="button button-positive" on-tap="insertCode(button.code)">
-                        <i class="icon ion-code"></i>
+                        <i class="icon ion-android-arrow-down"></i>
                     </button>
                     <button class="button button-energized" on-tap="openEditButton(button.name, button.code)">
                         <i class="icon ion-edit"></i>
@@ -60,10 +48,12 @@
     <div class="modal">
 
         <!-- Modal header bar -->
-        <ion-header-bar align-title="center" class="bar-positive">
-            <h1 class="title">New HTML Snip</h1>
+        <ion-header-bar align-title="center" class="bar-energized">
+            <h1 class="title" ng-if="type == 'buttonHtml'">New HTML Snip</h1>
+            <h1 class="title" ng-if="type == 'buttonCSS'">New CSS Snip</h1>
+            <h1 class="title" ng-if="type == 'buttonJS'">New JS Snip</h1>
             <button class="button button-icon" on-tap="closeNewButton()">
-                <i class="icon ion-close-circled calm"></i>
+                <i class="icon ion-close-circled assertive"></i>
             </button>
         </ion-header-bar>
 
@@ -80,11 +70,10 @@
                             <input type="text" placeholder="Code" ng-model="button_code">
                         </label>
                     </div>
-                    <div ng-if="type == 'buttonHtml'" class="padding">
-                        <button type="submit" class="button button-block button-energized">Create HTML Snip</button>
-                    </div>
-                    <div ng-if="type == 'buttonCSS'" class="padding">
-                        <button type="submit" class="button button-block button-energized">Create CSS Snip</button>
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonHtml'">Create HTML Snip</button>
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonCSS'">Create CSS Snip</button>
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonJS'">Create JS Snip</button>
                     </div>
                 </form>
             </div>
@@ -100,10 +89,10 @@
     <div class="modal">
 
         <!-- Modal header bar -->
-        <ion-header-bar align-title="center" class="bar-positive">
-            <h1 class="title">Edit HTML Button</h1>
+        <ion-header-bar align-title="center" class="bar-energized">
+            <h1 class="title">Edit JS Button</h1>
             <button class="button button-icon" on-tap="closeEditButton()">
-                <i class="icon ion-close-circled calm"></i>
+                <i class="icon ion-close-circled assertive"></i>
             </button>
         </ion-header-bar>
 
@@ -123,7 +112,7 @@
                     </div>
 
                     <div class="padding">
-                        <button type="submit" class="button button-block button-energized">Update Button</button>
+                        <button type="submit" class="button button-block button-balanced">Update Snip</button>
                     </div>
                 </form>
             </div>

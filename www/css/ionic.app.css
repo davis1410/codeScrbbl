@@ -7619,3 +7619,7 @@ code-preview {
 
 .popup-body {
   overflow: inherit; }
+
+#snips {
+  height: 33px;
+  margin-right: 5px; }

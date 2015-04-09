@@ -145,6 +145,10 @@ angular.module('code_scrbbl.controllers', [])
     
     // Initiate the code editor
     var editor = editorService.initializeEditor(type);
+    
+    // Data for button/snips menu
+    $scope.editor = editor;
+    $scope.btnType = "buttonJS";
 
     // Focus the editor and position the cursor on tap
     $scope.focusEditor = function() {
