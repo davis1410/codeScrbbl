@@ -7595,15 +7595,24 @@ textarea {
   -moz-box-shadow: 0 0 10px #ccc;
   box-shadow: 0 0 10px #ccc; }
 
-#output_area {
-  -webkit-box-shadow: 0 0 10px #ccc;
-  -moz-box-shadow: 0 0 10px #ccc;
-  box-shadow: 0 0 10px #ccc;
+.scroll {
+  height: 100%; }
+
+code-preview {
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+
+#preview_window {
   width: 100%;
-  height: 300px; }
+  height: 100%; }
 
 .ace-tm {
-  height: 450px;
+  height: 100%;
   -webkit-box-shadow: 0 0 10px #ccc;
   -moz-box-shadow: 0 0 10px #ccc;
   box-shadow: 0 0 10px #ccc; }

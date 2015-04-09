@@ -475,6 +475,7 @@ angular.module('code_scrbbl.controllers', [])
             preview_window.write("<html>");
             preview_window.write("<head>");
             preview_window.write("<style type='text/css'>" + preview.css + "</style>");
+            preview_window.write("<script src='lib/jquery/dist/jquery.min.js' type='text/javascript'></script>");
             preview_window.write("<script type='text/javascript'>window.onload = function() {" + preview.js + "}</script>");
             preview_window.write("</head>");
             preview_window.write("<body>");
