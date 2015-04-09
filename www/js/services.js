@@ -16,7 +16,7 @@ angular.module('code_scrbbl.services', [])
             
             return editor;
         },
-        focusEditor: function(editor, type) {
+        focusEditor: function(editor, type) {            
             editor.focus();
             editor.clearSelection();
 
@@ -26,7 +26,7 @@ angular.module('code_scrbbl.services', [])
 
                 var pos = editor.renderer.screenToTextCoordinates(row, column);
 
-                var move = editor.moveCursorToPosition(pos)
+                var move = editor.moveCursorToPosition(pos);
             });
             cordova.plugins.Keyboard.show();
         }
@@ -248,58 +248,4 @@ angular.module('code_scrbbl.services', [])
             }
         }
     }
-})
-
-.provider('shadowService', function() {
-    var supportsShadowDom = angular.isDefined(document.querySelector('body').createShadowRoot);
-
-    function getStyleInclusion(url) {
-      return url ? '<style>' +
-        '  @import url("' + url + '");' +
-        '</style>' : ''
-    }
-
-    this.$get = ['$compile', '$interpolate', '$templateCache',
-
-      function($compile, $interpolate, $templateCache) {
-        var shadowTemplate = $interpolate('<div ng-transclude></div>' +
-          '<template>{{style}}{{template}}</template>');
-
-        function handleShadowTemplate(config) {
-          var template = $templateCache.get(config.templateUrl);
-
-          if (supportsShadowDom) {
-            template =
-              template.replace('<div ng-transclude></div>', '<content></content>');
-            template = shadowTemplate({
-              style: getStyleInclusion(config.styleUrl),
-              template: template
-            })
-          }
-
-          return template;
-        }
-
-        function shadowLink(linkCallback) {
-          return function($scope, element, attr, controllers, transcludeFn) {
-            if (supportsShadowDom) {
-              var shadow = element.find('div')[0].createShadowRoot(),
-                template = element.find('template')[0],
-                clone = document.importNode(template.content, true),
-                elementWrapper = $interpolate(element.html());
-
-              shadow.appendChild(clone);
-              $compile(shadow)($scope);
-            }
-
-            linkCallback($scope, element, attr, controllers, transcludeFn);
-          }
-        }
-
-        return {
-          shadowTemplate: handleShadowTemplate,
-          shadowLink: shadowLink
-        };
-      }
-    ];
 });

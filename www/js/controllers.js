@@ -460,42 +460,29 @@ angular.module('code_scrbbl.controllers', [])
     };
 })
 
-.controller('PreviewCtrl', function($scope, $sce, scrbblService) {
-    // Get and render the code
-    $scope.$on('$ionicView.enter', function(){
-        var preview = scrbblService.previewScrbbl();
-        $scope.data = {
-            html: $sce.trustAsHtml(preview.html),
-            css: $sce.trustAsHtml(preview.css),
-            js: $sce.trustAsHtml(preview.js)
-        }
-    });
-})
-
-.run(function($templateCache) {
-    $templateCache.put('shadow.template.html',
-        '<div ng-transclude></div>' +
-        '<style ng-bind-html="css"></style>' +
-        '<ion-content ng-bind-html="html"></ion-content>' +
-        '<script type="text/javascript" ng-bind-html="js"></script>'
-    );
-})
-
-.directive('codePreview', function(shadowService) {
+.directive('codePreview', function() {
     return {
         restrict: 'E',
         replace: false,
-        template: shadowService.shadowTemplate({
-            templateUrl: 'shadow.template.html',
-        }),
         transclude: true,
-        scope: {
-            html: '=',
-            css: '=',
-            js: '='
-        },
-        link: shadowService.shadowLink(function($scope, element) {
+        scope: {},
+        controller: function($scope, scrbblService) {
+            var preview = scrbblService.previewScrbbl();
             
-        })
+            var preview_window = window.frames[0].document;
+        
+            preview_window.write("<!DOCTYPE html>");
+            preview_window.write("<html>");
+            preview_window.write("<head>");
+            preview_window.write("<style type='text/css'>" + preview.css + "</style>");
+            preview_window.write("<script type='text/javascript'>window.onload = function() {" + preview.js + "}</script>");
+            preview_window.write("</head>");
+            preview_window.write("<body>");
+            preview_window.write(preview.html);
+            preview_window.write("</body>");
+            preview_window.write("</html>");
+            preview_window.close();
+        },
+        templateUrl: 'templates/render-preview.html',
     };
 });

@@ -39,7 +39,7 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
         controller: 'NewScrbblCtrl'
     })
   
-    // New Scrbbl
+    // Manage Scrbbl
     .state('manage-scrbbls', {
         url: '/manage-scrbbls',
         templateUrl: 'templates/manage-scrbbls.html',
@@ -94,7 +94,6 @@ angular.module('code_scrbbl', ['ionic', 'code_scrbbl.controllers', 'code_scrbbl.
       views: {
         'tab-preview': {
           templateUrl: 'templates/tab-preview.html',
-          controller: 'PreviewCtrl'
         }
       }
     });
