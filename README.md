@@ -34,7 +34,3 @@ ionic run android (to open in an emulator or push to a connected device)
 In the side menu of the app you'll have the option of creating a new "Scrbbl" or managing existing ones. Once you've created a Scrbbl, you may edit the HTML, CSS, and JavaScript in their respective screens. You'll be able to preview the changes you've made to your code on the Preview tab.
 
 You may also create code buttons (or "Snips") for your most commonly used code. Tap on the "Snips" button in the upper right corner of any of the three language editing screens to create, edit, and delete code buttons.
-
-## Known Bugs
-1. JavaScript does not run on the preview screen.
-
