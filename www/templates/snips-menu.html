@@ -1,0 +1,124 @@
+<button id="snips" class="button button-energized" on-tap="openCodeButtons()">Snips</button>
+
+<script id="input_code.html" type="text/ng-template">
+    <div class="modal">
+
+        <ion-header-bar align-title="center" class="bar-energized">
+            <button class="button button-balanced" on-tap="newButton()">New</button>
+
+            <h1 class="title" ng-if="type == 'buttonHtml'">HTML Code Snips</h1>
+            <h1 class="title" ng-if="type == 'buttonCSS'">CSS Code Snips</h1>
+            <h1 class="title" ng-if="type == 'buttonJS'">JS Code Snips</h1>
+
+            <button class="button button-icon" on-tap="closeCodeButtons()">
+                <i class="icon ion-close-circled assertive"></i>
+            </button>
+        </ion-header-bar>
+
+        <ion-content>
+            <div class="card" ng-repeat="button in buttons">
+                <div class="item item-divider assertive">
+                    {{ button.name }}
+                </div>
+
+                <div class="item">
+                    {{ button.code }}
+                </div>
+
+                <div class="button-bar">
+                    <button class="button button-positive" on-tap="insertCode(button.code)">
+                        <i class="icon ion-android-arrow-down"></i>
+                    </button>
+                    <button class="button button-energized" on-tap="openEditButton(button.name, button.code)">
+                        <i class="icon ion-edit"></i>
+                    </button>
+                    <button class="button button-assertive" on-tap="deleteButton(type, button.name)">
+                        <i class="icon ion-trash-b"></i>
+                    </button>
+                </div>
+            </div>
+
+        </ion-content>
+
+    </div>
+</script>
+
+<script id="new_button.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar align-title="center" class="bar-energized">
+            <h1 class="title" ng-if="type == 'buttonHtml'">New HTML Snip</h1>
+            <h1 class="title" ng-if="type == 'buttonCSS'">New CSS Snip</h1>
+            <h1 class="title" ng-if="type == 'buttonJS'">New JS Snip</h1>
+            <button class="button button-icon" on-tap="closeNewButton()">
+                <i class="icon ion-close-circled assertive"></i>
+            </button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <div class="card">
+                <form ng-submit="createButton(type, button_name, button_code)">
+                    <div class="list">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Name" ng-model="button_name">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" placeholder="Code" ng-model="button_code">
+                        </label>
+                    </div>
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonHtml'">Create HTML Snip</button>
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonCSS'">Create CSS Snip</button>
+                        <button type="submit" class="button button-block button-balanced" ng-if="type == 'buttonJS'">Create JS Snip</button>
+                    </div>
+                </form>
+            </div>
+
+        </ion-content>
+
+    </div>
+
+</script>
+
+<script id="edit_button.html" type="text/ng-template">
+
+    <div class="modal">
+
+        <!-- Modal header bar -->
+        <ion-header-bar align-title="center" class="bar-energized">
+            <h1 class="title">Edit JS Button</h1>
+            <button class="button button-icon" on-tap="closeEditButton()">
+                <i class="icon ion-close-circled assertive"></i>
+            </button>
+        </ion-header-bar>
+
+        <!-- Modal content area -->
+        <ion-content>
+
+            <div class="card">
+                <form ng-submit="editButton(type, old_name, edit_button_name, edit_button_code)">
+                    <div class="list">
+                        <input type="hidden" name="old_name" ng-model="old_name">
+                        <label class="item item-input">
+                            <input type="text" placeholder="Name" ng-model="edit_button_name">
+                        </label>
+                        <label class="item item-input">
+                            <input type="text" placeholder="Code" ng-model="edit_button_code">
+                        </label>
+                    </div>
+
+                    <div class="padding">
+                        <button type="submit" class="button button-block button-balanced">Update Snip</button>
+                    </div>
+                </form>
+            </div>
+
+        </ion-content>
+
+    </div>
+
+</script>
